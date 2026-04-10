@@ -5,693 +5,538 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Our Meetings Revealed</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #080810;
-  --pink: #FF2D78;
-  --yellow: #FFE600;
-  --cyan: #00F0FF;
-  --purple: #A855F7;
-  --white: #FFFFFF;
+  --bg:     #0B1929;
+  --navy:   #0F2340;
+  --blue:   #3B82F6;
+  --blue2:  #1D4ED8;
+  --border: rgba(255,255,255,0.08);
+  --card:   rgba(255,255,255,0.04);
+  --muted:  rgba(255,255,255,0.45);
+  --soft:   rgba(255,255,255,0.72);
+  --white:  #FFFFFF;
 }
 
 html, body {
   width: 100%; height: 100%;
   background: var(--bg);
   color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   overflow: hidden;
 }
 
 .slideshow { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
 
 .slide {
-  position: absolute;
-  width: 100%; height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.65s cubic-bezier(.4,0,.2,1), transform 0.65s cubic-bezier(.4,0,.2,1);
-  pointer-events: none;
-  padding: 48px 80px;
+  position: absolute; inset: 0;
+  display: none; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: 56px 96px;
 }
+.slide.active { display: flex; }
 
-.slide.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
-}
-
-.slide.exit {
-  opacity: 0;
-  transform: translateY(-50px);
-}
-
-/* NAV */
+/* ── NAV ── */
 .nav-dots {
-  position: fixed; right: 28px; top: 50%;
+  position: fixed; right: 32px; top: 50%;
   transform: translateY(-50%);
   display: flex; flex-direction: column; gap: 10px;
   z-index: 100;
 }
 .nav-dot {
-  width: 7px; height: 7px; border-radius: 50%;
+  width: 6px; height: 6px; border-radius: 50%;
   background: rgba(255,255,255,0.18); cursor: pointer;
-  transition: all 0.3s;
+  border: none; transition: all 0.3s;
 }
-.nav-dot.active { background: var(--pink); transform: scale(1.5); }
-.slide-counter {
-  position: fixed; bottom: 28px; right: 36px;
-  font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  color: rgba(255,255,255,0.25); z-index: 100;
+.nav-dot.active { background: var(--blue); transform: scale(1.6); }
+
+.counter {
+  position: fixed; bottom: 28px; right: 40px;
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 1px; z-index: 100;
 }
 
-/* SLIDE 1 — TITLE */
-#slide-1 { text-align: center; position: relative; }
-#slide-1 canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-#slide-1 .content { position: relative; z-index: 1; }
+/* ── SHARED ── */
+.label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 18px;
+}
+.label.dim { color: var(--muted); }
 
-.eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; letter-spacing: 5px; text-transform: uppercase;
-  color: var(--pink); margin-bottom: 28px;
-  opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
+.h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 4.8vw, 68px);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -0.5px; margin-bottom: 36px;
+  color: var(--white);
 }
-.title-huge {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(52px, 7.5vw, 100px);
-  font-weight: 800; line-height: 1; letter-spacing: -3px;
-  margin-bottom: 40px;
-  opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
-}
-.title-huge em { color: var(--pink); font-style: normal; }
-.stat-row {
-  display: flex; gap: 20px; justify-content: center;
-  opacity: 0; animation: fadeUp 0.6s 0.8s forwards;
-}
-.stat-pill {
-  background: rgba(255,45,120,0.1); border: 1px solid rgba(255,45,120,0.28);
-  border-radius: 100px; padding: 11px 26px;
-  font-family: 'JetBrains Mono', monospace; font-size: 13px;
-}
-.stat-pill strong { color: var(--pink); }
+.h1 em { font-style: normal; color: var(--blue); }
 
-/* SLIDE 2 — LOSING MONEY */
-.slide-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  letter-spacing: 5px; text-transform: uppercase;
-  color: var(--yellow); margin-bottom: 14px; align-self: flex-start;
+.divider {
+  width: 48px; height: 3px;
+  background: var(--blue); border-radius: 2px;
+  margin-bottom: 28px;
 }
-.slide-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 800; line-height: 1.05; margin-bottom: 32px;
-  align-self: flex-start;
-}
-.slide-title em { font-style: normal; }
 
-.deal-cards { display: flex; gap: 18px; width: 100%; }
+/* ── SLIDE 1 ── */
+#s1 {
+  align-items: center; justify-content: center;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(59,130,246,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 30%, rgba(29,78,216,0.15) 0%, transparent 60%),
+    var(--bg);
+}
+
+#s1::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.s1-inner { position: relative; z-index: 1; max-width: 820px; }
+
+.s1-kicker {
+  display: inline-block;
+  border: 1px solid rgba(59,130,246,0.4);
+  color: var(--blue); border-radius: 4px;
+  padding: 6px 18px; font-size: 11px;
+  font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; margin-bottom: 32px;
+}
+
+.s1-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -1px; margin-bottom: 48px;
+}
+.s1-title em { font-style: italic; color: var(--blue); }
+
+.s1-stats {
+  display: flex; gap: 0; justify-content: center;
+  border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden;
+}
+.s1-stat {
+  flex: 1; padding: 20px 28px;
+  border-right: 1px solid var(--border);
+}
+.s1-stat:last-child { border-right: none; }
+.s1-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 700;
+  color: var(--blue); margin-bottom: 4px;
+}
+.s1-stat-label { font-size: 12px; color: var(--muted); }
+
+/* ── SLIDE 2 ── */
+.deal-row { display: flex; gap: 16px; width: 100%; margin-bottom: 18px; }
 .deal-card {
-  flex: 1; background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-top: 3px solid var(--yellow);
-  border-radius: 18px; padding: 28px;
-  transition: transform 0.3s, box-shadow 0.3s; cursor: default;
+  flex: 1; background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--blue);
+  border-radius: 8px; padding: 24px;
 }
-.deal-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 60px rgba(255,230,0,0.1);
+.deal-amt {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; font-weight: 700;
+  color: var(--blue); margin-bottom: 6px;
 }
-.deal-amount {
-  font-family: 'Syne', sans-serif; font-size: 40px;
-  font-weight: 800; color: var(--yellow); margin-bottom: 6px;
-}
-.deal-company { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
-.deal-reason { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
-.deal-tag {
+.deal-co { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+.deal-why { font-size: 12px; color: var(--muted); line-height: 1.65; }
+.deal-badge {
   display: inline-block; margin-top: 14px;
-  background: rgba(255,45,120,0.15); border: 1px solid rgba(255,45,120,0.3);
-  color: var(--pink); border-radius: 100px; padding: 3px 12px;
-  font-size: 10px; font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.3);
+  color: var(--blue); border-radius: 4px;
+  padding: 2px 10px; font-size: 10px;
+  font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.deal-badge.red {
+  background: rgba(239,68,68,0.1);
+  border-color: rgba(239,68,68,0.3);
+  color: #F87171;
 }
 
-.bottom-callout {
-  margin-top: 22px; width: 100%;
-  background: rgba(255,230,0,0.06); border: 1px solid rgba(255,230,0,0.18);
-  border-radius: 14px; padding: 18px 26px;
-  display: flex; align-items: center; gap: 18px;
+.callout {
+  width: 100%; display: flex; gap: 16px;
+  align-items: center; padding: 16px 22px;
+  background: rgba(59,130,246,0.07);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 8px;
+  font-size: 13px; color: var(--soft); line-height: 1.55;
 }
-.callout-icon { font-size: 26px; flex-shrink: 0; }
-.callout-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
-.callout-text strong { color: var(--yellow); }
+.callout-icon { font-size: 20px; flex-shrink: 0; }
+.callout strong { color: var(--white); }
 
-/* SLIDE 3 — DATA */
-.two-col { display: flex; gap: 56px; width: 100%; align-items: flex-start; }
-.col-left { flex: 1.2; }
-.col-right { flex: 1; }
-
-.col-subtitle {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: rgba(255,255,255,0.35); margin-bottom: 14px;
+/* ── SLIDE 3 ── */
+.two-col { display: flex; gap: 52px; width: 100%; align-items: flex-start; }
+.col { flex: 1; }
+.col-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
 }
-.data-silos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.silos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
 .silo {
-  background: rgba(0,240,255,0.05); border: 1px solid rgba(0,240,255,0.13);
-  border-radius: 14px; padding: 18px;
-  transition: all 0.3s; cursor: default;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px;
 }
-.silo:hover { background: rgba(0,240,255,0.1); border-color: var(--cyan); }
-.silo-icon { font-size: 22px; margin-bottom: 8px; }
-.silo-name { font-size: 13px; font-weight: 600; }
-.silo-note { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; }
+.silo-icon { font-size: 18px; margin-bottom: 6px; }
+.silo-name { font-size: 12px; font-weight: 600; }
+.silo-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.silo-note { font-size: 12px; color: var(--muted); line-height: 1.65; }
+.silo-note strong { color: var(--white); }
 
-.silo-note-block {
-  margin-top: 14px; font-size: 13px;
-  color: rgba(255,255,255,0.45); line-height: 1.6;
+.plist { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.pitem { display: flex; gap: 10px; align-items: flex-start; }
+.ptag {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--blue); background: rgba(59,130,246,0.1);
+  border-radius: 4px; padding: 2px 8px;
+  white-space: nowrap; flex-shrink: 0; margin-top: 2px;
 }
-.silo-note-block strong { color: var(--white); }
+.ptext { font-size: 13px; color: var(--soft); line-height: 1.55; }
+.ptext strong { color: var(--white); }
 
-.problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-.problem-item { display: flex; gap: 12px; align-items: flex-start; }
-.problem-num {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  color: var(--cyan); background: rgba(0,240,255,0.1);
-  border-radius: 6px; padding: 3px 8px;
-  white-space: nowrap; margin-top: 2px; flex-shrink: 0;
-}
-.problem-text { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.55; }
-.problem-text strong { color: var(--white); }
-
-/* SLIDE 4 — OPS DRAG */
-.timeline-track {
-  position: relative; padding-left: 26px;
-  display: flex; flex-direction: column; gap: 16px;
-}
-.timeline-track::before {
-  content: ''; position: absolute;
-  left: 7px; top: 6px; bottom: 6px;
-  width: 2px; background: rgba(255,255,255,0.08);
-}
-.timeline-item { position: relative; display: flex; gap: 18px; align-items: flex-start; }
-.tl-dot {
-  position: absolute; left: -23px; top: 6px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--pink); border: 2px solid var(--bg); flex-shrink: 0;
-}
-.tl-dot.y { background: var(--yellow); }
-.tl-dot.c { background: var(--cyan); }
-.tl-date {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  color: rgba(255,255,255,0.3); min-width: 50px; padding-top: 4px;
-}
-.tl-body {
-  flex: 1; background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 10px; padding: 11px 16px;
-}
-.tl-body strong { font-size: 13px; display: block; margin-bottom: 2px; }
-.tl-body span { font-size: 11px; color: rgba(255,255,255,0.4); }
-.tl-body.bad { border-color: rgba(255,45,120,0.25); background: rgba(255,45,120,0.05); }
-.tl-body.bad strong { color: var(--pink); }
-
-.ops-cards { display: flex; flex-direction: column; gap: 14px; }
-.ops-card {
-  background: rgba(255,45,120,0.06); border: 1px solid rgba(255,45,120,0.18);
-  border-radius: 14px; padding: 18px 22px;
-}
-.ops-card-title { font-size: 13px; font-weight: 600; color: var(--pink); margin-bottom: 5px; }
-.ops-card-body { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
-
-/* SLIDE 5 — AI */
-.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; width: 100%; }
-.ai-card {
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 18px; padding: 26px 28px;
-  transition: transform 0.3s, box-shadow 0.3s; cursor: default;
-}
-.ai-card:hover { transform: translateY(-4px); }
-.ai-card:nth-child(1) { border-top: 3px solid var(--pink); }
-.ai-card:nth-child(1):hover { box-shadow: 0 20px 50px rgba(255,45,120,0.12); }
-.ai-card:nth-child(2) { border-top: 3px solid var(--yellow); }
-.ai-card:nth-child(2):hover { box-shadow: 0 20px 50px rgba(255,230,0,0.1); }
-.ai-card:nth-child(3) { border-top: 3px solid var(--cyan); }
-.ai-card:nth-child(3):hover { box-shadow: 0 20px 50px rgba(0,240,255,0.1); }
-.ai-card:nth-child(4) { border-top: 3px solid var(--purple); }
-.ai-card:nth-child(4):hover { box-shadow: 0 20px 50px rgba(168,85,247,0.12); }
-.ai-emoji { font-size: 30px; margin-bottom: 12px; display: block; }
-.ai-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-.ai-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
-.ai-impact {
-  margin-top: 12px; font-size: 11px;
-  font-family: 'JetBrains Mono', monospace; color: rgba(255,255,255,0.3);
-}
-.ai-impact strong { color: rgba(255,255,255,0.6); }
-
-/* SLIDE 6 — ACTIONS */
-.action-cols { display: flex; gap: 18px; width: 100%; }
-.action-col {
-  flex: 1; border-radius: 18px; padding: 24px;
+/* ── SLIDE 4 ── */
+.tl-track {
+  position: relative; padding-left: 22px;
   display: flex; flex-direction: column; gap: 12px;
 }
-.action-col:nth-child(1) { background: rgba(255,45,120,0.07); border: 1px solid rgba(255,45,120,0.2); }
-.action-col:nth-child(2) { background: rgba(255,230,0,0.07); border: 1px solid rgba(255,230,0,0.2); }
-.action-col:nth-child(3) { background: rgba(0,240,255,0.07); border: 1px solid rgba(0,240,255,0.2); }
-
-.action-col-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-.action-col-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-.action-col:nth-child(1) .action-col-dot { background: var(--pink); }
-.action-col:nth-child(2) .action-col-dot { background: var(--yellow); }
-.action-col:nth-child(3) .action-col-dot { background: var(--cyan); }
-.action-col-title {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 3px; text-transform: uppercase;
+.tl-track::before {
+  content: ''; position: absolute;
+  left: 5px; top: 6px; bottom: 6px;
+  width: 1px; background: var(--border);
 }
-.action-col:nth-child(1) .action-col-title { color: var(--pink); }
-.action-col:nth-child(2) .action-col-title { color: var(--yellow); }
-.action-col:nth-child(3) .action-col-title { color: var(--cyan); }
-
-.action-item {
-  display: flex; gap: 10px; align-items: flex-start;
-  font-size: 12.5px; color: rgba(255,255,255,0.7); line-height: 1.55;
+.tl-item { position: relative; display: flex; gap: 12px; align-items: flex-start; }
+.tl-dot {
+  position: absolute; left: -19px; top: 5px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--muted); border: 2px solid var(--bg);
 }
-.action-arrow { color: rgba(255,255,255,0.2); flex-shrink: 0; margin-top: 1px; }
-.action-item strong { color: var(--white); }
-
-.cta-bar {
-  margin-top: 18px; width: 100%;
-  background: rgba(255,45,120,0.08); border: 1px solid rgba(255,45,120,0.22);
-  border-radius: 12px; padding: 14px 26px;
-  text-align: center; font-size: 13.5px; color: rgba(255,255,255,0.65);
+.tl-dot.b { background: var(--blue); }
+.tl-dot.r { background: #F87171; }
+.tl-date {
+  font-size: 10px; color: var(--muted);
+  min-width: 44px; padding-top: 4px; flex-shrink: 0;
 }
-.cta-bar strong { color: var(--pink); }
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+.tl-body {
+  flex: 1; background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 10px 14px;
 }
+.tl-body.bad { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.05); }
+.tl-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.tl-body.bad .tl-title { color: #F87171; }
+.tl-sub { font-size: 11px; color: var(--muted); }
 
-.animate-in { opacity: 0; }
-.slide.active .animate-in { animation: fadeUp 0.5s forwards; }
-.slide.active .animate-in:nth-child(1) { animation-delay: 0.08s; }
-.slide.active .animate-in:nth-child(2) { animation-delay: 0.18s; }
-.slide.active .animate-in:nth-child(3) { animation-delay: 0.30s; }
-.slide.active .animate-in:nth-child(4) { animation-delay: 0.44s; }
-.slide.active .animate-in:nth-child(5) { animation-delay: 0.56s; }
+.op-cards { display: flex; flex-direction: column; gap: 12px; }
+.op-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 2px solid var(--blue);
+  border-radius: 6px; padding: 16px 18px;
+}
+.op-title { font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--white); }
+.op-body { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* ── SLIDE 5 ── */
+.ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
+.ai-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px;
+  border-top: 2px solid var(--blue);
+}
+.ai-emoji { font-size: 24px; margin-bottom: 12px; display: block; }
+.ai-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.ai-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+.ai-fix {
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--muted);
+}
+.ai-fix strong { color: var(--soft); }
+
+/* ── SLIDE 6 ── */
+.act-cols { display: flex; gap: 16px; width: 100%; margin-bottom: 18px; }
+.act-col {
+  flex: 1; border-radius: 8px; padding: 22px;
+  background: var(--card); border: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.act-col:nth-child(1) { border-top: 2px solid var(--blue); }
+.act-col:nth-child(2) { border-top: 2px solid rgba(59,130,246,0.5); }
+.act-col:nth-child(3) { border-top: 2px solid rgba(59,130,246,0.25); }
+.act-head {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 4px;
+}
+.act-col:nth-child(2) .act-head { color: rgba(147,197,253,1); }
+.act-col:nth-child(3) .act-head { color: var(--muted); }
+.act-item {
+  display: flex; gap: 8px; align-items: flex-start;
+  font-size: 12px; color: var(--soft); line-height: 1.55;
+}
+.act-arr { color: var(--blue); flex-shrink: 0; }
+.act-item strong { color: var(--white); }
+
+.cta {
+  width: 100%;
+  background: rgba(59,130,246,0.08);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 8px; padding: 14px 24px;
+  text-align: center; font-size: 13px; color: var(--soft);
+}
+.cta strong { color: var(--blue); }
 </style>
 </head>
 <body>
 
 <div class="nav-dots" id="navDots"></div>
-<div class="slide-counter" id="slideCounter"></div>
+<div class="counter" id="counter"></div>
 
 <div class="slideshow">
 
-  <!-- SLIDE 1: TITLE -->
-  <div class="slide active" id="slide-1">
-    <canvas id="particles"></canvas>
-    <div class="content">
-      <div class="eyebrow">11 calls · March 2026 · DataPeople internal</div>
-      <div class="title-huge">What our<br>meetings <em>revealed</em></div>
-      <div class="stat-row">
-        <div class="stat-pill"><strong>$350K+</strong> at risk or already lost</div>
-        <div class="stat-pill"><strong>7</strong> systemic problems</div>
-        <div class="stat-pill"><strong>4</strong> AI fixes available now</div>
+<!-- ═══ SLIDE 1 ═══ -->
+<div class="slide active" id="s1">
+  <div class="s1-inner">
+    <div class="s1-kicker">DataPeople · Internal · March 2026</div>
+    <div class="s1-title">What our<br>meetings <em>revealed</em></div>
+    <div class="s1-stats">
+      <div class="s1-stat">
+        <div class="s1-stat-num">$350K+</div>
+        <div class="s1-stat-label">at risk or already lost</div>
+      </div>
+      <div class="s1-stat">
+        <div class="s1-stat-num">7</div>
+        <div class="s1-stat-label">systemic problems identified</div>
+      </div>
+      <div class="s1-stat">
+        <div class="s1-stat-num">4</div>
+        <div class="s1-stat-label">AI fixes available now</div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- SLIDE 2: LOSING MONEY -->
-  <div class="slide" id="slide-2">
-    <div class="slide-label animate-in">Problem #1 — Revenue</div>
-    <div class="slide-title animate-in">We're losing deals<br>because we respond <em style="color:var(--yellow)">too slowly</em></div>
-    <div class="deal-cards animate-in">
-      <div class="deal-card">
-        <div class="deal-amount">$80K</div>
-        <div class="deal-company">AgroTech Systems</div>
-        <div class="deal-reason">Peterson had 200 unread emails. Missed their message for 2 days. They signed with HRbox the same day they heard back.</div>
-        <div class="deal-tag">LOST</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-amount">~$120K</div>
-        <div class="deal-company">CargoTransit — 400 employees</div>
-        <div class="deal-reason">Pre-sales technical question forwarded to Dave — buried. Danny emailed twice, then Kevin deflected. Client waited 2 weeks. BambooHR answered in 2 days.</div>
-        <div class="deal-tag">LOST</div>
-      </div>
-      <div class="deal-card">
-        <div class="deal-amount">$150K</div>
-        <div class="deal-company">FinServe — 4,000 employees</div>
-        <div class="deal-reason">Inbound demo request sat 3 days while Katie was buried. Already in competitor talks by the time she responded. Katie is now thinking of leaving.</div>
-        <div class="deal-tag">AT RISK</div>
-      </div>
+<!-- ═══ SLIDE 2 ═══ -->
+<div class="slide" id="s2">
+  <div class="label">Problem 01 — Revenue</div>
+  <div class="divider"></div>
+  <div class="h1">We are losing deals because<br>we respond <em>too slowly</em></div>
+  <div class="deal-row">
+    <div class="deal-card">
+      <div class="deal-amt">$80K</div>
+      <div class="deal-co">AgroTech Systems</div>
+      <div class="deal-why">Peterson had 200 unread emails. Missed their message for 2 days. They signed with HRbox the same day they heard back.</div>
+      <div class="deal-badge red">Lost</div>
     </div>
-    <div class="bottom-callout animate-in">
-      <div class="callout-icon">⚡</div>
-      <div class="callout-text">Reps receive <strong>200–300 emails/day</strong> with zero prioritization. Anna estimates <strong>2–3 deals/month</strong> lost this way. Our best rep is burning out.</div>
+    <div class="deal-card">
+      <div class="deal-amt">~$120K</div>
+      <div class="deal-co">CargoTransit — 400 employees</div>
+      <div class="deal-why">Pre-sales question forwarded to Dave — buried. Danny emailed twice, Kevin deflected. Client waited 2 weeks. BambooHR answered in 2 days.</div>
+      <div class="deal-badge red">Lost</div>
+    </div>
+    <div class="deal-card">
+      <div class="deal-amt">$150K</div>
+      <div class="deal-co">FinServe — 4,000 employees</div>
+      <div class="deal-why">Inbound demo request sat 3 days while Katie was buried. Already talking to a competitor when she responded. Katie considering leaving.</div>
+      <div class="deal-badge">At Risk</div>
     </div>
   </div>
+  <div class="callout">
+    <div class="callout-icon">⚠</div>
+    <div>Reps receive <strong>200–300 emails/day</strong> with zero prioritization. Anna estimates <strong>2–3 deals/month</strong> are being lost this way. Our best rep is considering leaving.</div>
+  </div>
+</div>
 
-  <!-- SLIDE 3: DATA PROBLEM -->
-  <div class="slide" id="slide-3">
-    <div class="slide-label animate-in" style="color:var(--cyan)">Problems #2 & #3 — Data & Decisions</div>
-    <div class="slide-title animate-in">Data is everywhere.<br>Decisions are <em style="color:var(--cyan)">nowhere.</em></div>
-    <div class="two-col animate-in">
-      <div class="col-left">
-        <div class="col-subtitle">Board report data lives in 4 separate places</div>
-        <div class="data-silos">
-          <div class="silo">
-            <div class="silo-icon">📊</div>
-            <div class="silo-name">CRM</div>
-            <div class="silo-note">Half records outdated every week</div>
-          </div>
-          <div class="silo">
-            <div class="silo-icon">📑</div>
-            <div class="silo-name">Anna's spreadsheets</div>
-            <div class="silo-note">Updated manually, ad hoc</div>
-          </div>
-          <div class="silo">
-            <div class="silo-icon">🏦</div>
-            <div class="silo-name">Accounting</div>
-            <div class="silo-note">Separate system entirely</div>
-          </div>
-          <div class="silo">
-            <div class="silo-icon">📝</div>
-            <div class="silo-name">Kevin's notes</div>
-            <div class="silo-note">Informal, not synced to anyone</div>
-          </div>
-        </div>
-        <div class="silo-note-block">Last board prep took <strong>2 weeks</strong> to compile — and the numbers still didn't match (Kevin counts churn by accounts; Steve by revenue).</div>
+<!-- ═══ SLIDE 3 ═══ -->
+<div class="slide" id="s3">
+  <div class="label">Problems 02 & 03 — Data & Decisions</div>
+  <div class="divider"></div>
+  <div class="h1">Data is everywhere.<br>Decisions are <em>nowhere.</em></div>
+  <div class="two-col">
+    <div class="col">
+      <div class="col-label">Board report data lives in 4 separate places</div>
+      <div class="silos">
+        <div class="silo"><div class="silo-icon">📊</div><div class="silo-name">CRM</div><div class="silo-sub">Half records outdated weekly</div></div>
+        <div class="silo"><div class="silo-icon">📑</div><div class="silo-name">Anna's spreadsheets</div><div class="silo-sub">Updated manually, ad hoc</div></div>
+        <div class="silo"><div class="silo-icon">🏦</div><div class="silo-name">Accounting</div><div class="silo-sub">Separate system entirely</div></div>
+        <div class="silo"><div class="silo-icon">📝</div><div class="silo-name">Kevin's notes</div><div class="silo-sub">Informal, not synced</div></div>
       </div>
-      <div class="col-right">
-        <div class="col-subtitle">Decisions relitigated across meetings</div>
-        <ul class="problem-list">
-          <li class="problem-item">
-            <span class="problem-num">×3 meetings</span>
-            <span class="problem-text"><strong>Indeed partnership</strong> — re-discussed in 3 separate calls because nobody had a record of the original decision.</span>
-          </li>
-          <li class="problem-item">
-            <span class="problem-num">10 days</span>
-            <span class="problem-text"><strong>ProStandard complaint</strong> ($150K/year client) sat unanswered at legal@. Contract required 5-day response. Paul: "Nobody flagged that."</span>
-          </li>
-          <li class="problem-item">
-            <span class="problem-num">2 days</span>
-            <span class="problem-text"><strong>Owen's legal data request</strong> posted in Slack general — got lost. Mike saw it, assumed someone else would act. Nobody did.</span>
-          </li>
-          <li class="problem-item">
-            <span class="problem-num">disputed</span>
-            <span class="problem-text"><strong>NetSuite automation priority</strong> — Paul thought it was agreed. Kevin and Dave said it was only on the list.</span>
-          </li>
-        </ul>
-      </div>
+      <div class="silo-note">Last board prep took <strong>2 weeks</strong> to compile — and the numbers still didn't match. Kevin counts churn by accounts; Steve counts by revenue.</div>
+    </div>
+    <div class="col">
+      <div class="col-label">Decisions made in meetings are not recorded</div>
+      <ul class="plist">
+        <li class="pitem"><span class="ptag">×3 meetings</span><span class="ptext"><strong>Indeed partnership</strong> — re-discussed in 3 separate calls. No record of the original decision.</span></li>
+        <li class="pitem"><span class="ptag">10 days</span><span class="ptext"><strong>ProStandard complaint</strong> ($150K/year) sat unanswered at legal@. Contract required a 5-day response.</span></li>
+        <li class="pitem"><span class="ptag">2 days</span><span class="ptext"><strong>Owen's legal data request</strong> posted in Slack general — got lost. Mike saw it. Nobody acted.</span></li>
+        <li class="pitem"><span class="ptag">disputed</span><span class="ptext"><strong>NetSuite automation priority</strong> — Paul thought it was agreed. Kevin and Dave said it was only on the list.</span></li>
+      </ul>
     </div>
   </div>
+</div>
 
-  <!-- SLIDE 4: OPS DRAG -->
-  <div class="slide" id="slide-4">
-    <div class="slide-label animate-in" style="color:var(--pink)">Problems #4–6 — Operations</div>
-    <div class="slide-title animate-in">A finished design sat unused<br>for <em style="color:var(--pink)">2.5 months.</em></div>
-    <div class="two-col animate-in" style="gap:44px">
-      <div class="col-left">
-        <div class="col-subtitle">Enterprise landing page — full timeline</div>
-        <div class="timeline-track">
-          <div class="timeline-item">
-            <div class="tl-dot y"></div>
-            <div class="tl-date">Jan 15</div>
-            <div class="tl-body">
-              <strong>Katie finishes the design</strong>
-              <span>Logged in task tracker. Sits as "To Do" — invisible to engineering.</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Mar 3</div>
-            <div class="tl-body">
-              <strong>Marina raises it in weekly sync</strong>
-              <span>Dave: "No capacity." Paul: "Let's try mid-March."</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Mar 10</div>
-            <div class="tl-body">
-              <strong>Brief sent by email — Dave never saw it</strong>
-              <span>He asks Marina to resend via team chat. Still no developer.</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-dot"></div>
-            <div class="tl-date">Mar 24</div>
-            <div class="tl-body bad">
-              <strong>PeopleForce launches an equivalent page</strong>
-              <span>Calculator, case studies, video. Running Google Ads on "HR analytics" now.</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="tl-dot c"></div>
-            <div class="tl-date">Apr 1</div>
-            <div class="tl-body">
-              <strong>Jenny assigned. Conference: April 14.</strong>
-              <span>DataPeople converts 1.5% of visitors. HRbox converts 3.5%.</span>
-            </div>
-          </div>
+<!-- ═══ SLIDE 4 ═══ -->
+<div class="slide" id="s4">
+  <div class="label">Problems 04–06 — Operations</div>
+  <div class="divider"></div>
+  <div class="h1">A finished design sat unused<br>for <em>2.5 months.</em></div>
+  <div class="two-col" style="gap:48px">
+    <div class="col">
+      <div class="col-label">Enterprise landing page — full timeline</div>
+      <div class="tl-track">
+        <div class="tl-item">
+          <div class="tl-dot b"></div>
+          <div class="tl-date">Jan 15</div>
+          <div class="tl-body"><div class="tl-title">Katie completes the design</div><div class="tl-sub">Logged in tracker as "To Do" — invisible to engineering for 2 months.</div></div>
         </div>
-      </div>
-      <div class="col-right">
-        <div class="col-subtitle" style="margin-bottom:14px">Root causes behind the drag</div>
-        <div class="ops-cards">
-          <div class="ops-card">
-            <div class="ops-card-title">No cross-team request process</div>
-            <div class="ops-card-body">Marketing has no formal path into engineering's sprint planning. 3 months of verbal requests in weekly syncs — each one blocked or deferred.</div>
-          </div>
-          <div class="ops-card">
-            <div class="ops-card-title">Pre-sales technical questions: nobody owns them</div>
-            <div class="ops-card-body">Danny asked Dave (buried). Then Kevin ("not my area"). CargoTransit waited 2 weeks. Competitor answered in 2 days. This gap is structural.</div>
-          </div>
-          <div class="ops-card">
-            <div class="ops-card-title">20% test coverage in reports codebase</div>
-            <div class="ops-card-body">Mike: "Every time I go in there, I'm scared I'll break something." 18-month-old code. Slows every feature touching reporting.</div>
-          </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Mar 3</div>
+          <div class="tl-body"><div class="tl-title">Marina raises it in weekly sync</div><div class="tl-sub">Dave: "No capacity." Paul: "Let's try mid-March."</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Mar 10</div>
+          <div class="tl-body"><div class="tl-title">Brief sent by email — Dave never saw it</div><div class="tl-sub">He asks Marina to resend via team chat. Still no developer assigned.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot r"></div>
+          <div class="tl-date">Mar 24</div>
+          <div class="tl-body bad"><div class="tl-title">PeopleForce launches an equivalent page</div><div class="tl-sub">Calculator, case studies, video. Running Google Ads on "HR analytics" now.</div></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot b"></div>
+          <div class="tl-date">Apr 1</div>
+          <div class="tl-body"><div class="tl-title">Jenny assigned. Conference: April 14.</div><div class="tl-sub">DataPeople converts 1.5% of visitors. HRbox converts 3.5%.</div></div>
         </div>
       </div>
     </div>
+    <div class="col">
+      <div class="col-label" style="margin-bottom:14px">Structural root causes</div>
+      <div class="op-cards">
+        <div class="op-card"><div class="op-title">No cross-team request process</div><div class="op-body">Marketing has no formal path into engineering's sprint planning. 3 months of verbal requests in weekly syncs — each blocked or deferred.</div></div>
+        <div class="op-card"><div class="op-title">Pre-sales technical questions: no owner</div><div class="op-body">Danny → Dave (buried in server crash). Then Kevin ("not my area"). CargoTransit waited 2 weeks. This ownership gap is structural.</div></div>
+        <div class="op-card"><div class="op-title">20% test coverage in reports codebase</div><div class="op-body">Mike: "Every time I go in there, I'm scared I'll break something." 18-month-old launch code slows every feature touching reporting.</div></div>
+      </div>
+    </div>
   </div>
+</div>
 
-  <!-- SLIDE 5: AI -->
-  <div class="slide" id="slide-5">
-    <div class="slide-label animate-in" style="color:var(--purple)">AI Opportunities</div>
-    <div class="slide-title animate-in">Four fixes AI can deliver<br><em style="color:var(--purple)">without new headcount</em></div>
-    <div class="ai-grid animate-in">
-      <div class="ai-card">
-        <span class="ai-emoji">📬</span>
-        <div class="ai-title">Email triage & lead prioritization</div>
-        <div class="ai-desc">Surface the 5 emails each rep must answer now — new prospects, hot leads, at-risk clients — from 200+ messages per day. Reps see urgent first.</div>
-        <div class="ai-impact">Fixes: <strong>AgroTech · CargoTransit · FinServe · Katie's burnout</strong></div>
-      </div>
-      <div class="ai-card">
-        <span class="ai-emoji">🗂️</span>
-        <div class="ai-title">CRM auto-logging from email</div>
-        <div class="ai-desc">Parse inbound emails, auto-link to deals, update contact records. Reps stop manually logging — CRM becomes accurate automatically.</div>
-        <div class="ai-impact">Fixes: <strong>Half of CRM records outdated · LogisPro wrong-address failure</strong></div>
-      </div>
-      <div class="ai-card">
-        <span class="ai-emoji">📋</span>
-        <div class="ai-title">Meeting decision capture</div>
-        <div class="ai-desc">Auto-generate a 5-line decision log after every sync: what was decided, who owns it, by when. Posted to team chat within minutes of each call.</div>
-        <div class="ai-impact">Fixes: <strong>Indeed 3× · NetSuite dispute · ProStandard complaint missed</strong></div>
-      </div>
-      <div class="ai-card">
-        <span class="ai-emoji">📊</span>
-        <div class="ai-title">Automated board report pipeline</div>
-        <div class="ai-desc">One live dashboard — CRM + accounting + product data auto-consolidated. Steve gets current numbers instead of a 2-week manual reconciliation each quarter.</div>
-        <div class="ai-impact">Fixes: <strong>4 data silos · mismatched metrics · stale forecasts</strong></div>
-      </div>
+<!-- ═══ SLIDE 5 ═══ -->
+<div class="slide" id="s5">
+  <div class="label">AI Opportunities</div>
+  <div class="divider"></div>
+  <div class="h1">Four problems AI can solve<br><em>without adding headcount</em></div>
+  <div class="ai-grid">
+    <div class="ai-card">
+      <span class="ai-emoji">📬</span>
+      <div class="ai-title">Email triage & lead prioritization</div>
+      <div class="ai-desc">Surface the 5 emails each rep must answer immediately — new prospects, hot leads, at-risk clients — from 200+ daily messages.</div>
+      <div class="ai-fix">Addresses: <strong>AgroTech · CargoTransit · FinServe losses · rep burnout</strong></div>
+    </div>
+    <div class="ai-card">
+      <span class="ai-emoji">🗂️</span>
+      <div class="ai-title">CRM auto-logging from email</div>
+      <div class="ai-desc">Parse inbound emails, auto-link to deals, update contact records. Reps stop manually logging — CRM becomes accurate by default.</div>
+      <div class="ai-fix">Addresses: <strong>50% of CRM records outdated · LogisPro wrong-address incident</strong></div>
+    </div>
+    <div class="ai-card">
+      <span class="ai-emoji">📋</span>
+      <div class="ai-title">Meeting decision capture</div>
+      <div class="ai-desc">Auto-generate a structured decision log after every sync: what was decided, who owns it, by when. Posted to team chat within minutes.</div>
+      <div class="ai-fix">Addresses: <strong>Indeed discussed 3× · NetSuite dispute · complaint SLA breach</strong></div>
+    </div>
+    <div class="ai-card">
+      <span class="ai-emoji">📊</span>
+      <div class="ai-title">Automated board report pipeline</div>
+      <div class="ai-desc">Single live dashboard — CRM, accounting, and product data consolidated automatically. No more 2-week manual reconciliation each quarter.</div>
+      <div class="ai-fix">Addresses: <strong>4 data silos · mismatched churn metrics · stale forecasts</strong></div>
     </div>
   </div>
+</div>
 
-  <!-- SLIDE 6: ACTIONS -->
-  <div class="slide" id="slide-6">
-    <div class="slide-label animate-in">Recommended Actions</div>
-    <div class="slide-title animate-in">Three tiers.<br>Start <em style="color:var(--pink)">this week.</em></div>
-    <div class="action-cols animate-in">
-      <div class="action-col">
-        <div class="action-col-header">
-          <div class="action-col-dot"></div>
-          <div class="action-col-title">This week</div>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span><strong>Paul + Dave:</strong> 30-min meeting to define an email triage solution — concrete owner, concrete deadline. Discussed since Mar 5 with no output.</span>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span><strong>Anna:</strong> Set a 4-hour response SLA for all inbound leads. Track manually for 2 weeks to quantify the monthly loss rate.</span>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span><strong>One designated person:</strong> Write a 5-line decision log after every weekly sync and post it in team chat within 24 hours.</span>
-        </div>
-      </div>
-      <div class="action-col">
-        <div class="action-col-header">
-          <div class="action-col-dot"></div>
-          <div class="action-col-title">This month</div>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span>Evaluate off-the-shelf AI email prioritization tools — <strong>Dave + Anna</strong>, 2-week sprint. Off-the-shelf options exist; no custom dev needed to start.</span>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span>Mandate CRM logging of all inbound leads within 48 hours. Must come from <strong>Paul</strong> — Anna cannot enforce it alone.</span>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span><strong>Steve:</strong> Define 5–6 board metrics, build one shared spreadsheet each owner updates weekly. Ends the quarterly 2-week scramble.</span>
-        </div>
-      </div>
-      <div class="action-col">
-        <div class="action-col-header">
-          <div class="action-col-dot"></div>
-          <div class="action-col-title">Structural</div>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span>Create a formal intake process for cross-team requests. Marketing and legal submit to a shared tracker; engineering reviews in sprint planning — not ad hoc in weekly syncs.</span>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span>Assign a <strong>pre-sales technical owner</strong> — one person who answers integration questions for prospects. Not Dave or Kevin on a catch-as-catch-can basis.</span>
-        </div>
-        <div class="action-item">
-          <span class="action-arrow">→</span>
-          <span>Build a <strong>decision log</strong>: 2–3 sentences per major call, dated and searchable. Permanently ends the pattern of relitigating the same decisions.</span>
-        </div>
-      </div>
+<!-- ═══ SLIDE 6 ═══ -->
+<div class="slide" id="s6">
+  <div class="label">Recommended Actions</div>
+  <div class="divider"></div>
+  <div class="h1">Three tiers.<br>Start <em>this week.</em></div>
+  <div class="act-cols">
+    <div class="act-col">
+      <div class="act-head">This week</div>
+      <div class="act-item"><span class="act-arr">→</span><span><strong>Paul + Dave:</strong> 30-min meeting to define an email triage solution with a concrete owner and deadline. Discussed since March 5 with no output.</span></div>
+      <div class="act-item"><span class="act-arr">→</span><span><strong>Anna:</strong> Set a 4-hour response SLA for inbound leads. Track manually for 2 weeks to quantify the monthly cost of inaction.</span></div>
+      <div class="act-item"><span class="act-arr">→</span><span><strong>One designated person:</strong> Post a 5-line decision summary in team chat within 24 hours of every weekly sync.</span></div>
     </div>
-    <div class="cta-bar animate-in">
-      The biggest risk isn't HRbox or PeopleForce. It's losing <strong>Katie</strong>, <strong>Sasha</strong>, and the next <strong>$150K deal</strong> — to problems we've already identified and named.
+    <div class="act-col">
+      <div class="act-head">This month</div>
+      <div class="act-item"><span class="act-arr">→</span><span>Evaluate off-the-shelf AI email prioritization tools — <strong>Dave + Anna</strong>, 2-week sprint. No custom development required to start.</span></div>
+      <div class="act-item"><span class="act-arr">→</span><span>Mandate CRM logging of all inbound leads within 48 hours. Must come from <strong>Paul</strong> — Anna cannot enforce this alone.</span></div>
+      <div class="act-item"><span class="act-arr">→</span><span><strong>Steve:</strong> Define 5–6 board metrics, build one shared spreadsheet updated weekly. Eliminates the quarterly 2-week scramble.</span></div>
+    </div>
+    <div class="act-col">
+      <div class="act-head">Structural</div>
+      <div class="act-item"><span class="act-arr">→</span><span>Create a formal intake process for cross-team requests. Marketing and legal submit to a shared tracker, reviewed in sprint planning.</span></div>
+      <div class="act-item"><span class="act-arr">→</span><span>Assign a <strong>pre-sales technical owner</strong> — one person consistently responsible for answering integration questions for prospects.</span></div>
+      <div class="act-item"><span class="act-arr">→</span><span>Establish a <strong>decision log</strong>: 2–3 sentences per major decision, dated and searchable. Eliminates the pattern of relitigating settled questions.</span></div>
     </div>
   </div>
+  <div class="cta">The principal risk is not HRbox or PeopleForce. It is losing <strong>Katie</strong>, <strong>Sasha</strong>, and the next <strong>$150K deal</strong> — to problems we have already identified and named.</div>
+</div>
 
 </div>
 
 <script>
-// Particle canvas
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let pts = [];
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-function initPts() {
-  pts = [];
-  for (let i = 0; i < 90; i++) {
-    pts.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      r: Math.random() * 1.8 + 0.4,
-      a: Math.random() * 0.35 + 0.08,
-      c: Math.random() > 0.5 ? '#FF2D78' : '#00F0FF'
-    });
-  }
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  pts.forEach(p => {
-    p.x += p.vx; p.y += p.vy;
-    if (p.x < 0) p.x = canvas.width;
-    if (p.x > canvas.width) p.x = 0;
-    if (p.y < 0) p.y = canvas.height;
-    if (p.y > canvas.height) p.y = 0;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = p.c; ctx.globalAlpha = p.a;
-    ctx.fill();
-  });
-  for (let i = 0; i < pts.length; i++) {
-    for (let j = i + 1; j < pts.length; j++) {
-      const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-      const d = Math.sqrt(dx*dx + dy*dy);
-      if (d < 130) {
-        ctx.beginPath();
-        ctx.moveTo(pts[i].x, pts[i].y);
-        ctx.lineTo(pts[j].x, pts[j].y);
-        ctx.strokeStyle = 'rgba(255,45,120,' + (1 - d/130) * 0.1 + ')';
-        ctx.lineWidth = 0.5; ctx.globalAlpha = 1;
-        ctx.stroke();
-      }
-    }
-  }
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(draw);
-}
-
-resize(); initPts(); draw();
-window.addEventListener('resize', () => { resize(); initPts(); });
-
-// Slideshow
 const slides = Array.from(document.querySelectorAll('.slide'));
-const navEl = document.getElementById('navDots');
-const counter = document.getElementById('slideCounter');
+const navEl  = document.getElementById('navDots');
+const ctrEl  = document.getElementById('counter');
 let cur = 0;
 
 slides.forEach((_, i) => {
-  const d = document.createElement('div');
+  const d = document.createElement('button');
   d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+  d.setAttribute('aria-label', 'Slide ' + (i + 1));
   d.onclick = () => go(i);
   navEl.appendChild(d);
 });
 
-function updateUI() {
-  counter.textContent = (cur + 1) + ' / ' + slides.length;
-  document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+function ui() {
+  ctrEl.textContent = (cur + 1) + ' / ' + slides.length;
+  navEl.querySelectorAll('.nav-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === cur));
 }
 
 function go(n) {
-  if (n === cur) return;
+  if (n === cur || n < 0 || n >= slides.length) return;
   slides[cur].classList.remove('active');
-  slides[cur].classList.add('exit');
-  const prev = cur;
-  setTimeout(() => slides[prev].classList.remove('exit'), 700);
-
-  // Reset animations on target slide
-  slides[n].querySelectorAll('.animate-in').forEach(el => {
-    el.style.animation = 'none';
-    void el.offsetHeight;
-    el.style.animation = '';
-  });
-
   cur = n;
   slides[cur].classList.add('active');
-  updateUI();
+  ui();
 }
 
 document.addEventListener('keydown', e => {
-  if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); if (cur < slides.length - 1) go(cur + 1); }
-  if (['ArrowLeft', 'ArrowUp'].includes(e.key)) { e.preventDefault(); if (cur > 0) go(cur - 1); }
+  if (['ArrowRight', 'ArrowDown', ' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  if (['ArrowLeft', 'ArrowUp'].includes(e.key))          { e.preventDefault(); go(cur - 1); }
 });
 
 let tx = 0;
-document.addEventListener('touchstart', e => tx = e.touches[0].clientX);
-document.addEventListener('touchend', e => {
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive: true});
+document.addEventListener('touchend',   e => {
   const dx = tx - e.changedTouches[0].clientX;
-  if (Math.abs(dx) > 50) { if (dx > 0 && cur < slides.length - 1) go(cur + 1); else if (dx < 0 && cur > 0) go(cur - 1); }
-});
+  if (Math.abs(dx) > 50) go(dx > 0 ? cur + 1 : cur - 1);
+}, {passive: true});
 
-updateUI();
+ui();
 </script>
 </body>
 </html>
