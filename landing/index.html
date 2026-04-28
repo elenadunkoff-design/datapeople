@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datapeople — HR Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #F5F0E8;
+      --cream2:  #EDE8DF;
+      --slate:   #1A2635;
+      --slate2:  #263447;
+      --terra:   #C8552A;
+      --terra2:  #A8431E;
+      --muted:   #7A8697;
+      --line:    rgba(26,38,53,0.12);
+      --serif:   'Cormorant', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--slate);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none;
+      opacity: 0.025;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 56px;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      transition: padding 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--slate);
+      text-decoration: none;
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .nav-logo span {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: var(--terra);
+      border-radius: 50%;
+      margin-bottom: 2px;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--slate); }
+
+    .btn-nav {
+      background: var(--slate);
+      color: var(--cream) !important;
+      padding: 9px 22px;
+      border-radius: 2px;
+      font-weight: 500 !important;
+      letter-spacing: 0.05em !important;
+      transition: background 0.2s !important;
+    }
+    .btn-nav:hover { background: var(--terra) !important; color: #fff !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 56px 80px;
+      gap: 60px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 55%;
+      height: 100%;
+      background: var(--cream2);
+      z-index: 0;
+      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px; height: 1px;
+      background: var(--terra);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--slate);
+      margin-bottom: 28px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--terra);
+    }
+
+    .hero-desc {
+      font-size: 1.08rem;
+      line-height: 1.72;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 44px;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex; align-items: center; gap: 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--terra);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 2px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.22s, transform 0.18s;
+    }
+    .btn-primary:hover { background: var(--terra2); transform: translateY(-1px); }
+    .btn-primary svg { transition: transform 0.2s; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+
+    .hero-stat {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .hero-stat strong {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--slate);
+      display: block;
+      line-height: 1.1;
+    }
+
+    /* ─── DATA VIZ ILLUSTRATION ─── */
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .dashboard-mockup {
+      width: 100%;
+      max-width: 540px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 32px 80px rgba(26,38,53,0.14), 0 4px 16px rgba(26,38,53,0.06);
+      overflow: hidden;
+      animation: floatUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    @keyframes floatUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .db-header {
+      background: var(--slate);
+      padding: 14px 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .db-dot { width:10px; height:10px; border-radius:50%; }
+    .db-dot:nth-child(1){background:#ff5f57;}
+    .db-dot:nth-child(2){background:#febc2e;}
+    .db-dot:nth-child(3){background:#28c840;}
+    .db-title {
+      margin-left: 8px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .db-body { padding: 24px; }
+
+    .db-kpis {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 24px;
+    }
+    .db-kpi {
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .db-kpi-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .db-kpi-val {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--slate);
+      line-height: 1;
+    }
+    .db-kpi-delta {
+      font-size: 0.7rem;
+      margin-top: 4px;
+    }
+    .up { color: #22863a; }
+    .down { color: var(--terra); }
+
+    .db-chart-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .bar-chart {
+      display: flex; align-items: flex-end;
+      gap: 8px; height: 90px; margin-bottom: 24px;
+    }
+    .bar-wrap {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 6px; height: 100%;
+    }
+    .bar {
+      width: 100%; border-radius: 3px 3px 0 0;
+      background: var(--cream2);
+      transition: height 1.2s cubic-bezier(0.22,1,0.36,1);
+      position: relative;
+    }
+    .bar.highlight { background: var(--terra); }
+    .bar-label {
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .db-risk-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .risk-rows { display: flex; flex-direction: column; gap: 8px; }
+    .risk-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .risk-name {
+      font-size: 0.78rem;
+      color: var(--slate);
+      width: 100px; flex-shrink: 0;
+    }
+    .risk-bar-wrap {
+      flex: 1; height: 6px; background: var(--cream2); border-radius: 3px;
+      overflow: hidden;
+    }
+    .risk-bar {
+      height: 100%; border-radius: 3px;
+      animation: growBar 1.4s cubic-bezier(0.22,1,0.36,1) both;
+      animation-delay: 0.5s;
+    }
+    @keyframes growBar {
+      from { width: 0 !important; }
+    }
+    .risk-pct {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--slate);
+      width: 32px; text-align: right;
+    }
+
+    /* ─── SCROLL INDICATOR ─── */
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 56px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      z-index: 2;
+      animation: fadeInUp 1s 1.2s both;
+    }
+    .scroll-hint::before {
+      content: '';
+      display: block; width: 1px; height: 40px;
+      background: var(--muted);
+      animation: lineGrow 1s 1.5s both;
+    }
+    @keyframes lineGrow {
+      from { height: 0; }
+      to { height: 40px; }
+    }
+
+    /* ─── HERO ANIMATIONS ─── */
+    .hero-eyebrow { animation: fadeInUp 0.7s 0.1s both; }
+    h1 { animation: fadeInUp 0.7s 0.25s both; }
+    .hero-desc { animation: fadeInUp 0.7s 0.4s both; }
+    .hero-cta { animation: fadeInUp 0.7s 0.55s both; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 100px 56px; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 24px; height: 1px;
+      background: var(--terra);
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 3.8vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.12;
+      color: var(--slate);
+      margin-bottom: 16px;
+    }
+    h2 em { font-style: italic; color: var(--terra); }
+
+    .section-sub {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    /* ─── BENEFITS ─── */
+    .benefits { background: var(--cream2); }
+
+    .benefits-head {
+      max-width: 600px;
+      margin-bottom: 64px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .benefit-card {
+      background: var(--cream);
+      padding: 52px 48px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .benefit-card:hover { background: #fff; }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--terra);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .benefit-card:hover::before { transform: scaleX(1); }
+
+    .benefit-num {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--line);
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .benefit-icon {
+      width: 40px; height: 40px;
+      margin-bottom: 20px;
+      color: var(--terra);
+    }
+
+    .benefit-title {
+      font-family: var(--serif);
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--slate);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+
+    .benefit-desc {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* ─── TRUST ─── */
+    .trust {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .trust-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .stat-item {}
+    .stat-num {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 4.5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--slate);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-num sup {
+      font-size: 0.4em;
+      vertical-align: super;
+      color: var(--terra);
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+
+    .stat-divider {
+      width: 1px; height: 100%;
+      background: var(--line);
+      margin: 0 auto;
+    }
+
+    .trust-logos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .logo-cell {
+      background: var(--cream2);
+      aspect-ratio: 2/1;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s;
+    }
+    .logo-cell:hover { background: white; }
+
+    .logo-placeholder {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(26,38,53,0.25);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── TESTIMONIAL ─── */
+    .testimonial {
+      background: var(--slate);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial::before {
+      content: '\201C';
+      position: absolute;
+      top: -20px; left: 40px;
+      font-family: var(--serif);
+      font-size: 24rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.04);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .testimonial-inner {
+      position: relative; z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .testimonial-quote {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.42;
+      color: var(--cream);
+      font-style: italic;
+    }
+
+    .testimonial-meta {
+      display: flex; flex-direction: column; gap: 24px;
+    }
+
+    .testimonial-result {
+      display: flex; flex-direction: column;
+      gap: 4px;
+      padding: 28px;
+      border: 1px solid rgba(245,240,232,0.12);
+      border-radius: 4px;
+    }
+    .result-num {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--terra);
+      line-height: 1;
+    }
+    .result-label {
+      font-size: 0.82rem;
+      color: rgba(245,240,232,0.5);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .testimonial-author { display: flex; flex-direction: column; gap: 4px; }
+    .author-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+    .author-role {
+      font-size: 0.8rem;
+      color: rgba(245,240,232,0.45);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── FORM ─── */
+    .form-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .form-intro {}
+    .form-points {
+      margin-top: 36px;
+      display: flex; flex-direction: column; gap: 16px;
+      list-style: none;
+    }
+    .form-points li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .form-points li::before {
+      content: '';
+      flex-shrink: 0;
+      display: block;
+      width: 6px; height: 6px;
+      background: var(--terra);
+      border-radius: 50%;
+      margin-top: 7px;
+    }
+
+    .contact-form {
+      background: var(--cream2);
+      padding: 48px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+    }
+
+    .form-row { margin-bottom: 24px; }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      color: var(--slate);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(122,134,151,0.6); }
+    input:focus, textarea:focus {
+      border-color: var(--terra);
+      box-shadow: 0 0 0 3px rgba(200,85,42,0.1);
+    }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--terra);
+      color: #fff;
+      border: none; cursor: pointer;
+      padding: 16px 32px;
+      border-radius: 2px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.22s, transform 0.18s;
+      margin-top: 8px;
+    }
+    .btn-submit:hover { background: var(--terra2); transform: translateY(-1px); }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--slate);
+      color: rgba(245,240,232,0.4);
+      padding: 40px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--cream);
+      display: flex; align-items: baseline; gap: 6px;
+    }
+    .footer-logo span {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--terra);
+      border-radius: 50%;
+    }
+
+    .footer-copy { font-size: 0.78rem; letter-spacing: 0.04em; }
+
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      text-decoration: none;
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.35);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 28px; }
+      .nav-links { display: none; }
+      section { padding: 72px 28px; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 100px 28px 60px;
+        min-height: auto;
+      }
+      .hero::after { display: none; }
+      .hero-visual { margin-top: 20px; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .trust { grid-template-columns: 1fr; gap: 48px; }
+      .testimonial-inner { grid-template-columns: 1fr; gap: 40px; }
+      .form-section { grid-template-columns: 1fr; gap: 40px; }
+      .contact-form { padding: 32px 24px; }
+      footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      datapeople <span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#benefits">Product</a></li>
+      <li><a href="#trust">Clients</a></li>
+      <li><a href="#contact" class="btn-nav">Request Demo</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">HR Analytics Platform</div>
+      <h1>See your people <em>clearly</em></h1>
+      <p class="hero-desc">
+        Datapeople turns your workforce data into actionable intelligence — predicting who's at risk of leaving, who's burning out, and where to act before problems become costly.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">
+          Request a Demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <div class="hero-stat">
+          <strong>60+</strong>
+          companies trust Datapeople
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="dashboard-mockup">
+        <div class="db-header">
+          <div class="db-dot"></div>
+          <div class="db-dot"></div>
+          <div class="db-dot"></div>
+          <div class="db-title">Datapeople Analytics</div>
+        </div>
+        <div class="db-body">
+          <div class="db-kpis">
+            <div class="db-kpi">
+              <div class="db-kpi-label">Retention</div>
+              <div class="db-kpi-val">87%</div>
+              <div class="db-kpi-delta up">↑ 12%</div>
+            </div>
+            <div class="db-kpi">
+              <div class="db-kpi-label">Engagement</div>
+              <div class="db-kpi-val">74</div>
+              <div class="db-kpi-delta up">↑ 8 pts</div>
+            </div>
+            <div class="db-kpi">
+              <div class="db-kpi-label">At Risk</div>
+              <div class="db-kpi-val">3</div>
+              <div class="db-kpi-delta down">needs action</div>
+            </div>
+          </div>
+
+          <div class="db-chart-title">Turnover Trend — 6 Months</div>
+          <div class="bar-chart" id="barChart">
+            <div class="bar-wrap">
+              <div class="bar" style="height:60%"></div>
+              <div class="bar-label">Nov</div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="height:75%"></div>
+              <div class="bar-label">Dec</div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="height:55%"></div>
+              <div class="bar-label">Jan</div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar" style="height:45%"></div>
+              <div class="bar-label">Feb</div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar highlight" style="height:30%"></div>
+              <div class="bar-label">Mar</div>
+            </div>
+            <div class="bar-wrap">
+              <div class="bar highlight" style="height:22%"></div>
+              <div class="bar-label">Apr</div>
+            </div>
+          </div>
+
+          <div class="db-risk-title">Burnout Risk — Engineering</div>
+          <div class="risk-rows">
+            <div class="risk-row">
+              <div class="risk-name">A. Kowalski</div>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:82%; background:var(--terra)"></div>
+              </div>
+              <div class="risk-pct">82%</div>
+            </div>
+            <div class="risk-row">
+              <div class="risk-name">P. Nguyen</div>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:67%; background:#e89050"></div>
+              </div>
+              <div class="risk-pct">67%</div>
+            </div>
+            <div class="risk-row">
+              <div class="risk-name">M. Russo</div>
+              <div class="risk-bar-wrap">
+                <div class="risk-bar" style="width:41%; background:#c8b060"></div>
+              </div>
+              <div class="risk-pct">41%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">Scroll</div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="benefits">
+    <div class="benefits-head reveal">
+      <div class="section-label">Why Datapeople</div>
+      <h2>Analytics that <em>protect</em> your team</h2>
+      <p class="section-sub">From raw HR data to confident decisions — Datapeople surfaces what matters before it becomes a problem.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-num">01</div>
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/>
+        </svg>
+        <div class="benefit-title">Cut Turnover Costs Significantly</div>
+        <p class="benefit-desc">Replacing one employee costs 50–200% of their salary. Datapeople identifies flight risks months in advance, giving HR time to act — and keeping your best people where they belong.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">02</div>
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <div class="benefit-title">See Problems Before They Happen</div>
+        <p class="benefit-desc">Predictive models trained on thousands of workforce signals flag burnout, disengagement, and attrition risk weeks before they surface — so you're always one step ahead.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">03</div>
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <path d="M14 17.5h7M17.5 14v7"/>
+        </svg>
+        <div class="benefit-title">Dashboards That Actually Make Sense</div>
+        <p class="benefit-desc">Clean, executive-ready views of engagement, performance, and team health. No data science degree required — just the right numbers, in the right context, at the right time.</p>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-num">04</div>
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 3v18h18"/>
+          <path d="m7 16 4-4 4 4 5-5"/>
+        </svg>
+        <div class="benefit-title">HR That Speaks Business</div>
+        <p class="benefit-desc">Link workforce health to business outcomes. Correlate team stability with productivity, project velocity, and revenue — turning HR into a strategic driver, not a support function.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section id="trust">
+    <div class="trust reveal">
+      <div>
+        <div class="section-label">By the Numbers</div>
+        <h2>Trusted by <em>growing</em> companies</h2>
+        <p class="section-sub">From fast-scaling startups to established enterprises, Datapeople helps HR teams make decisions with confidence.</p>
+        <div class="trust-stats" style="margin-top:48px;">
+          <div class="stat-item">
+            <div class="stat-num">62<sup>+</sup></div>
+            <div class="stat-label">Companies actively<br>using Datapeople</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">40<sup>%</sup></div>
+            <div class="stat-label">Average reduction<br>in voluntary turnover</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3<sup>×</sup></div>
+            <div class="stat-label">Faster issue detection<br>vs. traditional HR surveys</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">14<sup>d</sup></div>
+            <div class="stat-label">Time to first<br>meaningful insight</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label" style="margin-bottom:24px;">Our Clients</div>
+        <div class="trust-logos">
+          <div class="logo-cell"><span class="logo-placeholder">Nexora</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Veltis</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Orbit</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Harven</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Stelix</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Korrida</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Fenlux</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Arion</span></div>
+          <div class="logo-cell"><span class="logo-placeholder">Covalent</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial" id="testimonial">
+    <div class="testimonial-inner reveal">
+      <blockquote class="testimonial-quote">
+        "We reduced voluntary turnover by 40% in the first year. Datapeople didn't just give us dashboards — it gave us the confidence to have hard conversations early, while there was still time to act."
+      </blockquote>
+      <div class="testimonial-meta">
+        <div class="testimonial-result">
+          <div class="result-num">40%</div>
+          <div class="result-label">Reduction in voluntary turnover</div>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-name">Sarah Chen</div>
+          <div class="author-role">Chief People Officer · GlobalScale Technologies</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="contact">
+    <div class="form-section reveal">
+      <div class="form-intro">
+        <div class="section-label">Get Started</div>
+        <h2>Let's show you what <em>your</em> data is saying</h2>
+        <p class="section-sub">
+          Book a personalized demo. We'll walk through your specific use case and show you what Datapeople surfaces in the first two weeks.
+        </p>
+        <ul class="form-points">
+          <li>30-minute live walkthrough with your own sample data</li>
+          <li>No sales pressure — just honest answers to your questions</li>
+          <li>Implementation in as little as 2 weeks, no IT overhaul required</li>
+          <li>SOC 2 compliant, GDPR-ready, enterprise-grade security</li>
+        </ul>
+      </div>
+
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Work Email</label>
+          <input type="email" id="email" name="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="form-row">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" placeholder="Acme Corp" required>
+        </div>
+        <div class="form-row">
+          <label for="size">Team Size</label>
+          <select id="size" name="size">
+            <option value="" disabled selected>Select range</option>
+            <option>50–200 employees</option>
+            <option>200–1,000 employees</option>
+            <option>1,000–5,000 employees</option>
+            <option>5,000+ employees</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="btnText">Request Your Demo</span>
+          <svg id="btnArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p class="form-note">We'll be in touch within one business day. No spam, ever.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">datapeople <span></span></div>
+    <div class="footer-copy">© 2026 Datapeople. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // ─── SCROLL REVEAL ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.delay || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+      el.dataset.delay = (i % 3) * 80;
+      observer.observe(el);
+    });
+
+    // ─── FORM SUBMIT ───
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+      const btnArrow = document.getElementById('btnArrow');
+
+      btn.disabled = true;
+      btn.style.background = '#22863a';
+      btnText.textContent = 'Request Sent!';
+      btnArrow.innerHTML = '<path d="M20 6L9 17l-5-5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.style.background = '';
+        btnText.textContent = 'Request Your Demo';
+        btnArrow.innerHTML = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
+      }, 3000);
+    }
+
+    // ─── NAV SCROLL SHRINK ───
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 40) {
+        nav.style.padding = '14px 56px';
+        nav.style.boxShadow = '0 2px 20px rgba(26,38,53,0.08)';
+      } else {
+        nav.style.padding = '22px 56px';
+        nav.style.boxShadow = 'none';
+      }
+    });
+
+    // ─── BAR CHART ANIMATION ───
+    const bars = document.querySelectorAll('.bar');
+    bars.forEach(bar => {
+      const h = bar.style.height;
+      bar.style.height = '0';
+      setTimeout(() => {
+        bar.style.transition = 'height 0.9s cubic-bezier(0.22,1,0.36,1)';
+        bar.style.height = h;
+      }, 600);
+    });
+  </script>
+</body>
+</html>
