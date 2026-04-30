@@ -1059,6 +1059,13 @@
       </div>
 
       <form class="contact-form" action="https://formspree.io/f/xvzloqaq" method="POST" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="roi_employees" id="hiddenEmployees">
+        <input type="hidden" name="roi_avg_salary" id="hiddenSalary">
+        <input type="hidden" name="roi_turnover_rate" id="hiddenTurnover">
+        <input type="hidden" name="roi_annual_turnover_cost" id="hiddenTurnoverCost">
+        <input type="hidden" name="roi_datapeople_cost" id="hiddenDpCost">
+        <input type="hidden" name="roi_projected_savings" id="hiddenSavings">
+        <input type="hidden" name="roi_multiple" id="hiddenROI">
         <div class="form-row">
           <label for="name">Full Name</label>
           <input type="text" id="name" name="name" placeholder="Jane Smith" required>
@@ -1162,6 +1169,24 @@
     function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
+
+      // Snapshot ROI calculator values into hidden fields
+      const employees    = +document.getElementById('calcEmployees').value;
+      const salary       = +document.getElementById('calcSalary').value;
+      const turnover     = +document.getElementById('calcTurnover').value;
+      const turnoverCost = employees * (turnover / 100) * salary * 0.5;
+      const dpCost       = employees * 35 * 12;
+      const savings      = turnoverCost * 0.34;
+      const net          = savings - dpCost;
+      const roi          = net > 0 ? (net / dpCost).toFixed(1) + 'x' : 'Break-even';
+      document.getElementById('hiddenEmployees').value    = employees;
+      document.getElementById('hiddenSalary').value       = '$' + salary.toLocaleString();
+      document.getElementById('hiddenTurnover').value     = turnover + '%';
+      document.getElementById('hiddenTurnoverCost').value = '$' + Math.round(turnoverCost).toLocaleString();
+      document.getElementById('hiddenDpCost').value       = '$' + Math.round(dpCost).toLocaleString();
+      document.getElementById('hiddenSavings').value      = '$' + Math.round(savings).toLocaleString();
+      document.getElementById('hiddenROI').value          = roi;
+
       const btn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
       const btnArrow = document.getElementById('btnArrow');
