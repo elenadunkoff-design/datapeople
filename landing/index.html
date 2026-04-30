@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datapeople — HR Analytics</title>
+  <title>Datapeople — Stop Losing Money to Preventable Turnover</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
       --primary:   #FF69B4;
       --secondary: #FFB6C1;
       --accent:    #FF1493;
+      --green:     #1DB87A;
       --gradient:        linear-gradient(135deg, #FF69B4, #FF1493);
       --gradient-soft:   linear-gradient(135deg, #FFF0F5, #FFE4F0);
       --shadow:    0 8px 32px rgba(255, 105, 180, 0.15);
@@ -41,14 +42,11 @@
     /* ─── UNI MASCOT (MANDATORY) ─── */
     .uni {
       position: fixed;
-      bottom: 24px;
-      right: 28px;
+      bottom: 24px; right: 28px;
       z-index: 1000;
-      font-size: 120px;
-      line-height: 1;
+      font-size: 120px; line-height: 1;
       animation: uniFloat 3s ease-in-out infinite;
-      cursor: default;
-      user-select: none;
+      cursor: default; user-select: none;
       filter: drop-shadow(0 8px 20px rgba(255, 105, 180, 0.3));
     }
     @keyframes uniFloat {
@@ -58,8 +56,7 @@
 
     /* ─── NAV ─── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 56px;
       background: rgba(255, 240, 245, 0.92);
@@ -68,324 +65,175 @@
       box-shadow: 0 2px 20px rgba(255, 105, 180, 0.08);
       transition: all 0.3s ease;
     }
-
-    .nav-logo {
-      display: flex; align-items: center;
-      text-decoration: none;
-    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
     .nav-logo img { height: 36px; width: auto; }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 36px;
-      list-style: none;
-    }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
     .nav-links a {
-      text-decoration: none;
-      color: var(--text-light);
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      text-decoration: none; color: var(--text-light);
+      font-size: 0.88rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
       transition: color 0.3s ease;
     }
     .nav-links a:hover { color: var(--accent); }
-
     .btn-nav {
-      background: var(--gradient) !important;
-      color: #fff !important;
-      padding: 10px 24px;
-      border-radius: 12px;
-      box-shadow: var(--shadow);
+      background: var(--gradient) !important; color: #fff !important;
+      padding: 10px 24px; border-radius: 12px; box-shadow: var(--shadow);
       transition: all 0.3s ease !important;
     }
-    .btn-nav:hover {
-      box-shadow: var(--shadow-lg) !important;
-      transform: translateY(-1px);
-      color: #fff !important;
-    }
+    .btn-nav:hover { box-shadow: var(--shadow-lg) !important; transform: translateY(-1px); }
 
     /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 120px 56px 80px;
-      gap: 60px;
-      position: relative;
-      background: var(--gradient-soft);
-      overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 120px 56px 80px; gap: 60px;
+      position: relative; background: var(--gradient-soft); overflow: hidden;
     }
-
-    /* Soft decorative blobs */
     .hero::before {
-      content: '';
-      position: absolute;
-      top: -120px; right: -120px;
+      content: ''; position: absolute; top: -120px; right: -120px;
       width: 500px; height: 500px;
       background: radial-gradient(circle, rgba(255,105,180,0.18) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
+      border-radius: 50%; pointer-events: none;
     }
     .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: -80px;
+      content: ''; position: absolute; bottom: -80px; left: -80px;
       width: 380px; height: 380px;
       background: radial-gradient(circle, rgba(255,20,147,0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
+      border-radius: 50%; pointer-events: none;
     }
-
     .hero-text { position: relative; z-index: 1; }
-
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--body);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
-      background: rgba(255,20,147,0.08);
-      padding: 6px 16px;
-      border-radius: 100px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 24px;
+      background: rgba(255,20,147,0.08); padding: 6px 16px; border-radius: 100px;
     }
-
     h1 {
       font-family: var(--heading);
-      font-size: clamp(2.8rem, 5vw, 4.2rem);
-      font-weight: 700;
-      line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 24px;
+      font-size: clamp(2.6rem, 4.8vw, 3.8rem);
+      font-weight: 700; line-height: 1.15; color: var(--text); margin-bottom: 24px;
     }
     h1 .gradient-text {
       background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(29,184,122,0.1); color: var(--green);
+      font-size: 0.82rem; font-weight: 700; padding: 6px 14px;
+      border-radius: 100px; margin-bottom: 20px;
+      border: 1.5px solid rgba(29,184,122,0.25);
+    }
+    .hero-badge::before { content: '⚡'; }
     .hero-desc {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      color: var(--text-light);
-      max-width: 460px;
-      margin-bottom: 40px;
-      font-weight: 400;
+      font-size: 1.08rem; line-height: 1.75; color: var(--text-light);
+      max-width: 460px; margin-bottom: 32px; font-weight: 400;
     }
-
-    .hero-cta {
-      display: flex; align-items: center; gap: 24px;
+    .hero-stats-row {
+      display: flex; gap: 24px; margin-bottom: 36px; flex-wrap: wrap;
     }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
+    .hero-mini-stat {
+      display: flex; flex-direction: column;
+      background: var(--white); padding: 14px 20px;
+      border-radius: 16px; box-shadow: var(--shadow);
+      min-width: 100px;
+    }
+    .hero-mini-stat strong {
+      font-family: var(--heading); font-size: 1.7rem; font-weight: 700;
       background: var(--gradient);
-      color: #fff;
-      padding: 16px 36px;
-      border-radius: 12px;
-      font-family: var(--body);
-      font-size: 1rem;
-      font-weight: 700;
-      text-decoration: none;
-      border: none; cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
-    }
-    .btn-primary:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-    .btn-primary svg { transition: transform 0.3s ease; }
-    .btn-primary:hover svg { transform: translateX(4px); }
-
-    .hero-stat {
-      font-family: var(--body);
-      font-size: 0.92rem;
-      color: var(--text-light);
-      font-weight: 400;
-    }
-    .hero-stat strong {
-      font-family: var(--heading);
-      font-size: 2rem;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: block;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       line-height: 1.1;
     }
+    .hero-mini-stat span { font-size: 0.75rem; color: var(--text-light); font-weight: 600; margin-top: 2px; }
+    .hero-cta { display: flex; align-items: center; gap: 20px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--gradient); color: #fff;
+      padding: 16px 36px; border-radius: 12px;
+      font-family: var(--body); font-size: 1rem; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      box-shadow: var(--shadow); transition: all 0.3s ease;
+    }
+    .btn-primary:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .btn-primary svg { transition: transform 0.3s ease; }
+    .btn-primary:hover svg { transform: translateX(4px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: gap 0.3s ease;
+    }
+    .btn-secondary:hover { gap: 12px; }
 
     /* ─── DASHBOARD MOCKUP ─── */
-    .hero-visual {
-      position: relative; z-index: 1;
-      display: flex; align-items: center; justify-content: center;
-    }
-
+    .hero-visual { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
     .dashboard-mockup {
-      width: 100%;
-      max-width: 520px;
-      background: var(--white);
-      border-radius: 24px;
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
+      width: 100%; max-width: 520px;
+      background: var(--white); border-radius: 24px;
+      box-shadow: var(--shadow-lg); overflow: hidden;
       animation: floatUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
     }
-
     @keyframes floatUp {
       from { opacity: 0; transform: translateY(40px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .db-header {
-      background: var(--gradient);
-      padding: 16px 20px;
+      background: var(--gradient); padding: 16px 20px;
       display: flex; align-items: center; gap: 8px;
     }
     .db-dot { width:10px; height:10px; border-radius:50%; background: rgba(255,255,255,0.5); }
     .db-dot:nth-child(1){ background: rgba(255,255,255,0.9); }
     .db-title {
-      margin-left: 8px;
-      font-family: var(--heading);
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 0.08em;
-      font-weight: 600;
+      margin-left: 8px; font-family: var(--heading);
+      font-size: 0.78rem; color: rgba(255,255,255,0.9);
+      letter-spacing: 0.08em; font-weight: 600;
     }
-
     .db-body { padding: 24px; }
-
-    .db-kpis {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-bottom: 24px;
-    }
-    .db-kpi {
-      background: var(--bg);
-      border-radius: 16px;
-      padding: 14px 16px;
-    }
-    .db-kpi-label {
-      font-size: 0.68rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-light);
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-    .db-kpi-val {
-      font-family: var(--heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1;
-    }
-    .db-kpi-delta {
-      font-size: 0.7rem;
-      margin-top: 4px;
-      font-weight: 700;
-    }
+    .db-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .db-kpi { background: var(--bg); border-radius: 16px; padding: 14px 16px; }
+    .db-kpi-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 6px; font-weight: 600; }
+    .db-kpi-val { font-family: var(--heading); font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1; }
+    .db-kpi-delta { font-size: 0.7rem; margin-top: 4px; font-weight: 700; }
     .up { color: #22a86a; }
     .down { color: var(--accent); }
-
-    .db-chart-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-light);
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-
-    .bar-chart {
-      display: flex; align-items: flex-end;
-      gap: 8px; height: 90px; margin-bottom: 24px;
-    }
-    .bar-wrap {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; gap: 6px; height: 100%;
-    }
-    .bar {
-      width: 100%; border-radius: 6px 6px 0 0;
-      background: var(--secondary);
-      transition: height 1.2s cubic-bezier(0.22,1,0.36,1);
-    }
+    .db-chart-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 14px; font-weight: 700; }
+    .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 90px; margin-bottom: 24px; }
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; }
+    .bar { width: 100%; border-radius: 6px 6px 0 0; background: var(--secondary); transition: height 1.2s cubic-bezier(0.22,1,0.36,1); }
     .bar.highlight { background: var(--gradient); }
-    .bar-label {
-      font-size: 0.62rem;
-      color: var(--text-light);
-      letter-spacing: 0.04em;
-      font-weight: 600;
-    }
-
-    .db-risk-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-light);
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
+    .bar-label { font-size: 0.62rem; color: var(--text-light); letter-spacing: 0.04em; font-weight: 600; }
+    .db-risk-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 12px; font-weight: 700; }
     .risk-rows { display: flex; flex-direction: column; gap: 8px; }
     .risk-row { display: flex; align-items: center; gap: 10px; }
-    .risk-name {
-      font-size: 0.78rem;
-      color: var(--text);
-      width: 100px; flex-shrink: 0;
-      font-weight: 600;
-    }
-    .risk-bar-wrap {
-      flex: 1; height: 8px;
-      background: var(--bg);
-      border-radius: 100px;
-      overflow: hidden;
-    }
-    .risk-bar {
-      height: 100%; border-radius: 100px;
-      animation: growBar 1.4s cubic-bezier(0.22,1,0.36,1) both;
-      animation-delay: 0.5s;
-    }
+    .risk-name { font-size: 0.75rem; color: var(--text); width: 110px; flex-shrink: 0; font-weight: 600; }
+    .risk-badge { font-size: 0.62rem; font-weight: 700; padding: 2px 7px; border-radius: 100px; }
+    .risk-badge.high { background: rgba(255,20,147,0.12); color: var(--accent); }
+    .risk-badge.med  { background: rgba(255,105,180,0.15); color: var(--primary); }
+    .risk-badge.low  { background: rgba(29,184,122,0.12); color: var(--green); }
+    .risk-bar-wrap { flex: 1; height: 8px; background: var(--bg); border-radius: 100px; overflow: hidden; }
+    .risk-bar { height: 100%; border-radius: 100px; animation: growBar 1.4s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.5s; }
     @keyframes growBar { from { width: 0 !important; } }
-    .risk-pct {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--text);
-      width: 32px; text-align: right;
-    }
+    .risk-pct { font-size: 0.7rem; font-weight: 700; color: var(--text); width: 32px; text-align: right; }
 
-    /* ─── SCROLL INDICATOR ─── */
     .scroll-hint {
       position: absolute; bottom: 32px; left: 56px;
       display: flex; align-items: center; gap: 10px;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      z-index: 2;
-      font-weight: 700;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-light); z-index: 2; font-weight: 700;
       animation: fadeInUp 1s 1.2s both;
     }
     .scroll-hint::before {
-      content: '';
-      display: block; width: 2px; height: 36px;
-      background: var(--gradient);
-      border-radius: 2px;
+      content: ''; display: block; width: 2px; height: 36px;
+      background: var(--gradient); border-radius: 2px;
       animation: lineGrow 1s 1.5s both;
     }
-    @keyframes lineGrow {
-      from { height: 0; }
-      to   { height: 36px; }
-    }
+    @keyframes lineGrow { from { height: 0; } to { height: 36px; } }
 
-    /* ─── HERO ANIMATIONS ─── */
     .hero-eyebrow { animation: fadeInUp 0.7s 0.1s both; }
     h1 { animation: fadeInUp 0.7s 0.25s both; }
+    .hero-badge { animation: fadeInUp 0.7s 0.32s both; }
     .hero-desc { animation: fadeInUp 0.7s 0.4s both; }
-    .hero-cta { animation: fadeInUp 0.7s 0.55s both; }
-
+    .hero-stats-row { animation: fadeInUp 0.7s 0.5s both; }
+    .hero-cta { animation: fadeInUp 0.7s 0.6s both; }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -393,437 +241,343 @@
 
     /* ─── SECTION COMMONS ─── */
     section { padding: 100px 56px; }
-
     .section-label {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      background: rgba(255,20,147,0.08);
-      padding: 6px 16px;
-      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+      background: rgba(255,20,147,0.08); padding: 6px 16px; border-radius: 100px;
     }
-
     h2 {
-      font-family: var(--heading);
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text);
-      margin-bottom: 16px;
+      font-family: var(--heading); font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 16px;
     }
     h2 .gradient-text {
       background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
-    .section-sub {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--text-light);
-      max-width: 520px;
-      font-weight: 400;
-    }
+    .section-sub { font-size: 1.05rem; line-height: 1.75; color: var(--text-light); max-width: 520px; font-weight: 400; }
 
     /* ─── BENEFITS ─── */
     .benefits { background: var(--white); }
-
-    .benefits-head {
-      max-width: 620px;
-      margin-bottom: 56px;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
+    .benefits-head { max-width: 620px; margin-bottom: 56px; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .benefit-card {
-      background: var(--bg);
-      padding: 48px 44px;
-      border-radius: 24px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
+      background: var(--bg); padding: 48px 44px; border-radius: 24px;
+      position: relative; overflow: hidden; box-shadow: var(--shadow);
       transition: all 0.3s ease;
     }
-    .benefit-card:hover {
-      background: var(--white);
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
-    }
-
+    .benefit-card:hover { background: var(--white); box-shadow: var(--shadow-lg); transform: translateY(-4px); }
     .benefit-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-      border-radius: 24px 24px 0 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--gradient); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease; border-radius: 24px 24px 0 0;
     }
     .benefit-card:hover::before { transform: scaleX(1); }
-
     .benefit-num {
-      font-family: var(--heading);
-      font-size: 3rem;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 20px;
-      opacity: 0.25;
+      font-family: var(--heading); font-size: 3rem; font-weight: 700;
+      background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin-bottom: 20px; opacity: 0.25;
     }
-
     .benefit-icon {
-      width: 44px; height: 44px;
-      margin-bottom: 20px;
-      color: var(--accent);
-      background: rgba(255,20,147,0.1);
-      padding: 10px;
-      border-radius: 12px;
+      width: 44px; height: 44px; margin-bottom: 20px; color: var(--accent);
+      background: rgba(255,20,147,0.1); padding: 10px; border-radius: 12px;
     }
-
-    .benefit-title {
-      font-family: var(--heading);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-
-    .benefit-desc {
-      font-size: 0.95rem;
-      line-height: 1.72;
-      color: var(--text-light);
-      font-weight: 400;
-    }
+    .benefit-title { font-family: var(--heading); font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.3; }
+    .benefit-desc { font-size: 0.95rem; line-height: 1.72; color: var(--text-light); font-weight: 400; }
 
     /* ─── PHOTO SECTION ─── */
     .photo-section { background: var(--bg); }
+    .photo-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center; }
+    .hero-photo { width: 100%; border-radius: 24px; box-shadow: var(--shadow-lg); display: block; }
 
-    .photo-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 64px;
-      align-items: center;
-    }
+    /* ─── ROI CALCULATOR ─── */
+    .roi-section { background: var(--white); }
+    .roi-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 
-    .hero-photo {
-      width: 100%;
-      border-radius: 24px;
-      box-shadow: var(--shadow-lg);
-      display: block;
+    .roi-calculator {
+      background: var(--bg); padding: 48px;
+      border-radius: 24px; border: 2px solid rgba(255,105,180,0.15);
+      box-shadow: var(--shadow);
     }
+    .roi-calculator h3 {
+      font-family: var(--heading); font-size: 1.3rem; font-weight: 700;
+      color: var(--text); margin-bottom: 28px;
+    }
+    .calc-row { margin-bottom: 22px; }
+    .calc-row label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text); margin-bottom: 10px;
+    }
+    .calc-row label span {
+      font-family: var(--heading); font-size: 1rem; font-weight: 700;
+      background: var(--gradient); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: 0; text-transform: none;
+    }
+    input[type="range"] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 6px; border-radius: 100px; outline: none; cursor: pointer;
+      background: var(--secondary); border: none; padding: 0; box-shadow: none;
+      transition: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--gradient); cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255,105,180,0.4);
+      transition: transform 0.2s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    input[type="range"]:focus { border: none; box-shadow: none; }
 
-    @media (max-width: 900px) {
-      .photo-inner { grid-template-columns: 1fr; }
+    .roi-results {
+      margin-top: 28px; padding-top: 28px;
+      border-top: 2px solid rgba(255,105,180,0.15);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
+    .roi-result-item {
+      background: var(--white); padding: 18px 20px;
+      border-radius: 16px; box-shadow: var(--shadow);
+    }
+    .roi-result-item.highlight { background: var(--gradient); color: #fff; }
+    .roi-result-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--text-light); margin-bottom: 6px; }
+    .roi-result-item.highlight .roi-result-label { color: rgba(255,255,255,0.75); }
+    .roi-result-val { font-family: var(--heading); font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.1; }
+    .roi-result-item.highlight .roi-result-val { color: #fff; }
+    .roi-cta { margin-top: 24px; }
+    .roi-note { font-size: 0.78rem; color: var(--text-light); margin-top: 10px; text-align: center; }
+
+    .roi-context { padding-top: 16px; }
+    .roi-context h3 { font-family: var(--heading); font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 16px; line-height: 1.3; }
+    .roi-proof-list { list-style: none; display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+    .roi-proof-list li {
+      display: flex; gap: 16px; align-items: flex-start;
+      background: var(--bg); padding: 20px 24px; border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    .roi-proof-num {
+      font-family: var(--heading); font-size: 1.8rem; font-weight: 700;
+      background: var(--gradient); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; flex-shrink: 0; min-width: 64px;
+    }
+    .roi-proof-text strong { display: block; font-weight: 700; color: var(--text); font-size: 0.95rem; margin-bottom: 2px; }
+    .roi-proof-text span { font-size: 0.88rem; color: var(--text-light); }
+
+    /* ─── INTEGRATIONS ─── */
+    .integrations-section { background: var(--bg); }
+    .integrations-head { text-align: center; max-width: 560px; margin: 0 auto 48px; }
+    .integrations-head .section-sub { margin: 0 auto; }
+    .integrations-grid {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 16px; max-width: 860px; margin: 0 auto 32px;
+    }
+    .integration-tile {
+      background: var(--white); padding: 22px 32px;
+      border-radius: 16px; box-shadow: var(--shadow);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      min-width: 140px; transition: all 0.3s ease;
+    }
+    .integration-tile:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .integration-icon { font-size: 2rem; }
+    .integration-name { font-family: var(--heading); font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .integrations-tagline {
+      text-align: center; font-size: 0.95rem; color: var(--text-light);
+      font-weight: 600;
+    }
+    .integrations-tagline strong { color: var(--accent); }
 
     /* ─── TRUST ─── */
     .trust-section { background: var(--white); }
-
-    .trust {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 80px;
-    }
-
-    .trust-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-top: 48px;
-    }
-
+    .trust { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; }
+    .trust-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
     .stat-item {
-      background: var(--white);
-      padding: 28px 24px;
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+      background: var(--bg); padding: 24px 20px; border-radius: 20px;
+      box-shadow: var(--shadow); transition: all 0.3s ease;
     }
-    .stat-item:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-3px);
-    }
-
+    .stat-item:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
     .stat-num {
-      font-family: var(--heading);
-      font-size: clamp(2.4rem, 3.5vw, 3.4rem);
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
+      font-family: var(--heading); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 700;
+      background: var(--gradient); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
     }
-    .stat-num sup {
-      font-size: 0.45em;
-      vertical-align: super;
-    }
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-top: 8px;
-      line-height: 1.5;
-      font-weight: 600;
-    }
-
-    .trust-logos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
+    .stat-num sup { font-size: 0.45em; vertical-align: super; }
+    .stat-label { font-size: 0.82rem; color: var(--text-light); margin-top: 6px; line-height: 1.5; font-weight: 600; }
+    .trust-logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .logo-cell {
-      background: var(--white);
-      aspect-ratio: 2/1;
+      background: var(--bg); aspect-ratio: 2/1;
       display: flex; align-items: center; justify-content: center;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+      border-radius: 16px; box-shadow: var(--shadow); transition: all 0.3s ease;
     }
-    .logo-cell:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
+    .logo-cell:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); background: var(--white); }
+    .logo-placeholder { font-family: var(--heading); font-size: 0.88rem; font-weight: 700; color: rgba(74,74,74,0.3); letter-spacing: 0.06em; text-transform: uppercase; }
 
-    .logo-placeholder {
-      font-family: var(--heading);
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: rgba(74,74,74,0.3);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    /* ─── CASE STUDY ─── */
+    .case-study { background: var(--gradient); color: #fff; position: relative; overflow: hidden; }
+    .case-study::before {
+      content: '"'; position: absolute; top: -40px; left: 40px;
+      font-family: var(--heading); font-size: 22rem; line-height: 1;
+      color: rgba(255,255,255,0.07); pointer-events: none; z-index: 0;
     }
-
-    /* ─── TESTIMONIAL ─── */
-    .testimonial {
-      background: var(--gradient);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+    .case-inner { position: relative; z-index: 1; }
+    .case-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 20px;
+      background: rgba(255,255,255,0.15); padding: 6px 16px; border-radius: 100px;
     }
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-bottom: 48px; }
+    .case-quote {
+      font-family: var(--heading); font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      font-weight: 300; line-height: 1.55; color: rgba(255,255,255,0.95);
+      margin-bottom: 28px;
+    }
+    .case-author { display: flex; flex-direction: column; gap: 3px; }
+    .case-author strong { font-family: var(--heading); font-size: 1rem; font-weight: 700; color: #fff; }
+    .case-author span { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .case-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .case-metric {
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+      border: 2px solid rgba(255,255,255,0.22); border-radius: 20px; padding: 24px 20px;
+    }
+    .case-metric-num { font-family: var(--heading); font-size: 2.4rem; font-weight: 700; color: #fff; line-height: 1; }
+    .case-metric-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-top: 6px; }
+    .case-divider { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 36px 0; }
+    .case-pullquote {
+      background: rgba(255,255,255,0.12); border-radius: 20px; padding: 28px 32px;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .case-pullquote p { font-size: 1rem; color: rgba(255,255,255,0.9); line-height: 1.6; font-style: italic; }
+    .case-pullquote cite { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 10px; font-style: normal; font-weight: 700; }
 
-    .testimonial::before {
-      content: '\201C';
-      position: absolute;
-      top: -40px; left: 40px;
-      font-family: var(--heading);
-      font-size: 22rem;
-      line-height: 1;
-      color: rgba(255,255,255,0.08);
-      pointer-events: none;
+    /* ─── TIMELINE ─── */
+    .timeline-section { background: var(--bg); }
+    .timeline-head { max-width: 580px; margin-bottom: 56px; }
+    .timeline-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; position: relative;
+    }
+    .timeline-steps::before {
+      content: ''; position: absolute;
+      top: 36px; left: calc(16.67% + 16px); right: calc(16.67% + 16px);
+      height: 2px; background: linear-gradient(90deg, var(--secondary), var(--primary));
       z-index: 0;
     }
+    .timeline-step { position: relative; z-index: 1; }
+    .step-dot {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--gradient); display: flex; align-items: center; justify-content: center;
+      font-family: var(--heading); font-size: 1.1rem; font-weight: 700; color: #fff;
+      box-shadow: var(--shadow); margin-bottom: 20px;
+    }
+    .step-days {
+      display: inline-block; font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); background: rgba(255,20,147,0.08);
+      padding: 4px 12px; border-radius: 100px; margin-bottom: 10px;
+    }
+    .step-title { font-family: var(--heading); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .step-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.65; }
+    .timeline-note {
+      margin-top: 32px; padding: 20px 28px; background: var(--white);
+      border-radius: 16px; box-shadow: var(--shadow);
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 0.9rem; color: var(--text-light);
+    }
+    .timeline-note strong { color: var(--text); }
 
-    .testimonial-inner {
-      position: relative; z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
+    /* ─── WHY DATAPEOPLE ─── */
+    .why-section { background: var(--white); }
+    .why-head { max-width: 560px; margin-bottom: 52px; }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .why-card {
+      background: var(--bg); padding: 36px 28px; border-radius: 24px;
+      box-shadow: var(--shadow); transition: all 0.3s ease; text-align: center;
     }
-
-    .testimonial-quote {
-      font-family: var(--heading);
-      font-size: clamp(1.4rem, 2.5vw, 2rem);
-      font-weight: 300;
-      line-height: 1.5;
-      color: rgba(255,255,255,0.95);
-    }
-
-    .testimonial-meta {
-      display: flex; flex-direction: column; gap: 24px;
-    }
-
-    .testimonial-result {
-      display: flex; flex-direction: column;
-      gap: 4px;
-      padding: 28px;
-      border: 2px solid rgba(255,255,255,0.25);
-      border-radius: 20px;
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(8px);
-    }
-    .result-num {
-      font-family: var(--heading);
-      font-size: 4rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1;
-    }
-    .result-label {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .testimonial-author { display: flex; flex-direction: column; gap: 4px; }
-    .author-name {
-      font-family: var(--heading);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-    }
-    .author-role {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.04em;
-    }
+    .why-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); background: var(--white); }
+    .why-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+    .why-title { font-family: var(--heading); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .why-desc { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+    .why-desc strong { color: var(--accent); font-weight: 700; }
 
     /* ─── FORM ─── */
-    .form-section-wrap { background: var(--white); }
-
-    .form-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .form-points {
-      margin-top: 36px;
-      display: flex; flex-direction: column; gap: 16px;
-      list-style: none;
-    }
+    .form-section-wrap { background: var(--bg); }
+    .form-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .form-points { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; list-style: none; }
     .form-points li {
       display: flex; align-items: flex-start; gap: 14px;
-      font-size: 0.95rem;
-      color: var(--text-light);
-      line-height: 1.65;
-      font-weight: 400;
+      font-size: 0.95rem; color: var(--text-light); line-height: 1.65; font-weight: 400;
     }
     .form-points li::before {
-      content: '♥';
-      flex-shrink: 0;
-      font-size: 14px;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-top: 3px;
+      content: '♥'; flex-shrink: 0; font-size: 14px;
+      background: var(--gradient); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text; margin-top: 3px;
     }
-
-    .contact-form {
-      background: var(--bg);
-      padding: 48px;
-      border-radius: 24px;
-      border: 2px solid rgba(255,105,180,0.15);
+    .leadership-cta {
+      margin-top: 32px; padding: 24px 28px; background: var(--white);
+      border-radius: 20px; border: 2px solid rgba(255,105,180,0.2);
       box-shadow: var(--shadow);
     }
-
-    .form-row { margin-bottom: 24px; }
-
-    label {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      background: var(--white);
-      border: 2px solid rgba(255,105,180,0.2);
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-family: var(--body);
-      font-size: 1rem;
-      color: var(--text);
-      outline: none;
+    .leadership-cta p { font-size: 0.92rem; color: var(--text-light); margin-bottom: 14px; }
+    .leadership-cta p strong { color: var(--text); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 2px solid var(--primary); color: var(--accent); background: transparent;
+      padding: 10px 22px; border-radius: 12px; font-family: var(--body);
+      font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer;
       transition: all 0.3s ease;
+    }
+    .btn-outline:hover { background: var(--gradient); color: #fff; border-color: transparent; box-shadow: var(--shadow); }
+
+    .contact-form {
+      background: var(--white); padding: 48px; border-radius: 24px;
+      border: 2px solid rgba(255,105,180,0.15); box-shadow: var(--shadow);
+    }
+    .form-row { margin-bottom: 24px; }
+    label {
+      display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text); margin-bottom: 8px;
+    }
+    input, select, textarea {
+      width: 100%; background: var(--bg); border: 2px solid rgba(255,105,180,0.2);
+      border-radius: 12px; padding: 14px 18px; font-family: var(--body);
+      font-size: 1rem; color: var(--text); outline: none; transition: all 0.3s ease;
       -webkit-appearance: none;
     }
     input::placeholder, textarea::placeholder { color: rgba(154,138,146,0.6); }
     input:focus, textarea:focus, select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.12);
+      border-color: var(--primary); box-shadow: 0 0 0 4px rgba(255, 105, 180, 0.12);
     }
-
     textarea { resize: vertical; min-height: 90px; }
-
     .btn-submit {
-      width: 100%;
-      background: var(--gradient);
-      color: #fff;
-      border: none; cursor: pointer;
-      padding: 18px 32px;
-      border-radius: 12px;
-      font-family: var(--body);
-      font-size: 1rem;
-      font-weight: 700;
+      width: 100%; background: var(--gradient); color: #fff;
+      border: none; cursor: pointer; padding: 18px 32px; border-radius: 12px;
+      font-family: var(--body); font-size: 1rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
-      margin-top: 8px;
+      box-shadow: var(--shadow); transition: all 0.3s ease; margin-top: 8px;
     }
-    .btn-submit:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
-
-    .form-note {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      text-align: center;
-      margin-top: 14px;
-    }
+    .btn-submit:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .form-note { font-size: 0.8rem; color: var(--text-light); text-align: center; margin-top: 14px; }
 
     /* ─── FOOTER ─── */
     footer {
-      background: #FFE4F0;
-      color: var(--text-light);
-      padding: 40px 56px;
+      background: #FFE4F0; color: var(--text-light); padding: 40px 56px;
       display: flex; align-items: center; justify-content: space-between;
       border-top: 2px solid rgba(255,105,180,0.15);
     }
-
-    .footer-logo {
-      display: flex; align-items: center;
-    }
+    .footer-logo { display: flex; align-items: center; }
     .footer-logo img { height: 28px; width: auto; opacity: 0.8; }
-
-    .footer-copy {
-      font-size: 0.82rem;
-      letter-spacing: 0.03em;
-      font-weight: 600;
-      color: rgba(74,74,74,0.5);
-    }
-
+    .footer-copy { font-size: 0.82rem; letter-spacing: 0.03em; font-weight: 600; color: rgba(74,74,74,0.5); }
     .footer-links { display: flex; gap: 28px; }
     .footer-links a {
-      text-decoration: none;
-      font-size: 0.82rem;
-      color: rgba(74,74,74,0.45);
-      font-weight: 600;
-      transition: color 0.3s ease;
+      text-decoration: none; font-size: 0.82rem; color: rgba(74,74,74,0.45);
+      font-weight: 600; transition: color 0.3s ease;
     }
     .footer-links a:hover { color: var(--accent); }
 
     /* ─── SCROLL REVEAL ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ─── RESPONSIVE ─── */
@@ -831,15 +585,18 @@
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
       section { padding: 72px 24px; }
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 100px 24px 60px;
-        min-height: auto;
-      }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; min-height: auto; }
       .hero-visual { margin-top: 20px; }
       .benefits-grid { grid-template-columns: 1fr; }
+      .photo-inner { grid-template-columns: 1fr; }
+      .roi-inner { grid-template-columns: 1fr; }
+      .integrations-grid { gap: 12px; }
       .trust { grid-template-columns: 1fr; gap: 48px; }
-      .testimonial-inner { grid-template-columns: 1fr; gap: 40px; }
+      .case-grid { grid-template-columns: 1fr; gap: 32px; }
+      .case-metrics { grid-template-columns: 1fr 1fr; }
+      .timeline-steps { grid-template-columns: 1fr; }
+      .timeline-steps::before { display: none; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
       .form-section { grid-template-columns: 1fr; gap: 40px; }
       .contact-form { padding: 32px 24px; }
       footer { flex-direction: column; gap: 20px; text-align: center; }
@@ -849,16 +606,15 @@
 </head>
 <body>
 
-  <!-- UNI MASCOT — MANDATORY, no exceptions per brand guidelines -->
+  <!-- UNI MASCOT — MANDATORY per brand guidelines -->
   <div class="uni" title="Uni — DataPeople's Chief Happiness Officer 🌈">🦄</div>
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">
-      <img src="datapeople-logo.png" alt="datapeople">
-    </a>
+    <a href="#" class="nav-logo"><img src="datapeople-logo.png" alt="datapeople"></a>
     <ul class="nav-links">
       <li><a href="#benefits">Product</a></li>
+      <li><a href="#roi">ROI Calculator</a></li>
       <li><a href="#trust">Clients</a></li>
       <li><a href="#contact" class="btn-nav">Request Demo</a></li>
     </ul>
@@ -867,29 +623,46 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-text">
-      <div class="hero-eyebrow">HR Analytics Platform</div>
-      <h1>See your people <span class="gradient-text">clearly</span></h1>
+      <div class="hero-eyebrow">Human Capital Management</div>
+      <h1>Turn turnover costs into <span class="gradient-text">savings</span></h1>
+      <div class="hero-badge">2 weeks to first results</div>
       <p class="hero-desc">
-        Datapeople turns your workforce data into actionable intelligence — predicting who's at risk of leaving, who's burning out, and where to act before problems become costly.
+        Datapeople predicts who's about to leave, who's burning out, and what to do about it — before the cost hits your books. Average client ROI: 6×.
       </p>
+      <div class="hero-stats-row">
+        <div class="hero-mini-stat">
+          <strong>−34%</strong>
+          <span>Avg turnover reduction</span>
+        </div>
+        <div class="hero-mini-stat">
+          <strong>6×</strong>
+          <span>Average ROI</span>
+        </div>
+        <div class="hero-mini-stat">
+          <strong>84%</strong>
+          <span>Prediction accuracy</span>
+        </div>
+        <div class="hero-mini-stat">
+          <strong>78</strong>
+          <span>Companies</span>
+        </div>
+      </div>
       <div class="hero-cta">
         <a href="#contact" class="btn-primary">
           Request a Demo
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
-        <div class="hero-stat">
-          <strong>60+</strong>
-          companies trust Datapeople
-        </div>
+        <a href="#roi" class="btn-secondary">
+          Calculate my ROI
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
 
     <div class="hero-visual">
       <div class="dashboard-mockup">
         <div class="db-header">
-          <div class="db-dot"></div>
-          <div class="db-dot"></div>
-          <div class="db-dot"></div>
+          <div class="db-dot"></div><div class="db-dot"></div><div class="db-dot"></div>
           <div class="db-title">Datapeople Analytics</div>
         </div>
         <div class="db-body">
@@ -905,62 +678,38 @@
               <div class="db-kpi-delta up">↑ 8 pts</div>
             </div>
             <div class="db-kpi">
-              <div class="db-kpi-label">At Risk</div>
+              <div class="db-kpi-label">Risk Zones</div>
               <div class="db-kpi-val">3</div>
               <div class="db-kpi-delta down">needs action</div>
             </div>
           </div>
 
           <div class="db-chart-title">Turnover Trend — 6 Months</div>
-          <div class="bar-chart" id="barChart">
-            <div class="bar-wrap">
-              <div class="bar" style="height:60%"></div>
-              <div class="bar-label">Nov</div>
-            </div>
-            <div class="bar-wrap">
-              <div class="bar" style="height:75%"></div>
-              <div class="bar-label">Dec</div>
-            </div>
-            <div class="bar-wrap">
-              <div class="bar" style="height:55%"></div>
-              <div class="bar-label">Jan</div>
-            </div>
-            <div class="bar-wrap">
-              <div class="bar" style="height:45%"></div>
-              <div class="bar-label">Feb</div>
-            </div>
-            <div class="bar-wrap">
-              <div class="bar highlight" style="height:30%"></div>
-              <div class="bar-label">Mar</div>
-            </div>
-            <div class="bar-wrap">
-              <div class="bar highlight" style="height:22%"></div>
-              <div class="bar-label">Apr</div>
-            </div>
+          <div class="bar-chart">
+            <div class="bar-wrap"><div class="bar" style="height:60%"></div><div class="bar-label">Nov</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:75%"></div><div class="bar-label">Dec</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:55%"></div><div class="bar-label">Jan</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:45%"></div><div class="bar-label">Feb</div></div>
+            <div class="bar-wrap"><div class="bar highlight" style="height:30%"></div><div class="bar-label">Mar</div></div>
+            <div class="bar-wrap"><div class="bar highlight" style="height:22%"></div><div class="bar-label">Apr</div></div>
           </div>
 
-          <div class="db-risk-title">Burnout Risk — Engineering</div>
+          <div class="db-risk-title">Risk Zones — Engineering Team</div>
           <div class="risk-rows">
             <div class="risk-row">
-              <div class="risk-name">A. Kowalski</div>
-              <div class="risk-bar-wrap">
-                <div class="risk-bar" style="width:82%; background: linear-gradient(90deg, #FF69B4, #FF1493)"></div>
-              </div>
-              <div class="risk-pct">82%</div>
+              <div class="risk-name">Senior Engineer</div>
+              <div class="risk-bar-wrap"><div class="risk-bar" style="width:82%; background: linear-gradient(90deg, #FF69B4, #FF1493)"></div></div>
+              <span class="risk-badge high">High</span>
             </div>
             <div class="risk-row">
-              <div class="risk-name">P. Nguyen</div>
-              <div class="risk-bar-wrap">
-                <div class="risk-bar" style="width:67%; background: linear-gradient(90deg, #FFB6C1, #FF69B4)"></div>
-              </div>
-              <div class="risk-pct">67%</div>
+              <div class="risk-name">Lead Designer</div>
+              <div class="risk-bar-wrap"><div class="risk-bar" style="width:67%; background: linear-gradient(90deg, #FFB6C1, #FF69B4)"></div></div>
+              <span class="risk-badge med">Med</span>
             </div>
             <div class="risk-row">
-              <div class="risk-name">M. Russo</div>
-              <div class="risk-bar-wrap">
-                <div class="risk-bar" style="width:41%; background: linear-gradient(90deg, #FFD6E4, #FFB6C1)"></div>
-              </div>
-              <div class="risk-pct">41%</div>
+              <div class="risk-name">Product Manager</div>
+              <div class="risk-bar-wrap"><div class="risk-bar" style="width:41%; background: linear-gradient(90deg, #FFD6E4, #FFB6C1)"></div></div>
+              <span class="risk-badge low">Low</span>
             </div>
           </div>
         </div>
@@ -974,8 +723,8 @@
   <section class="benefits" id="benefits">
     <div class="benefits-head reveal">
       <div class="section-label">Why Datapeople</div>
-      <h2>Analytics that <span class="gradient-text">protect</span> your team</h2>
-      <p class="section-sub">From raw HR data to confident decisions — Datapeople surfaces what matters before it becomes a problem.</p>
+      <h2>More than dashboards — <span class="gradient-text">an action plan</span></h2>
+      <p class="section-sub">Datapeople doesn't just show you the problem. It tells you what to do about it — with 3–5 specific recommendations per at-risk employee.</p>
     </div>
     <div class="benefits-grid">
       <div class="benefit-card reveal">
@@ -983,8 +732,8 @@
         <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/>
         </svg>
-        <div class="benefit-title">Cut Turnover Costs Significantly</div>
-        <p class="benefit-desc">Replacing one employee costs 50–200% of their salary. Datapeople identifies flight risks months in advance, giving HR time to act — and keeping your best people where they belong.</p>
+        <div class="benefit-title">Cut Turnover Costs — With Numbers</div>
+        <p class="benefit-desc">Replacing one employee costs 50–200% of their salary. Datapeople identifies risk zones months in advance, giving HR time to act. Clients following our recommendations reduce turnover 34% in 6 months.</p>
       </div>
       <div class="benefit-card reveal">
         <div class="benefit-num">02</div>
@@ -993,7 +742,7 @@
           <circle cx="12" cy="12" r="3"/>
         </svg>
         <div class="benefit-title">See Problems Before They Happen</div>
-        <p class="benefit-desc">Predictive models trained on thousands of workforce signals flag burnout, disengagement, and attrition risk weeks before they surface — so you're always one step ahead.</p>
+        <p class="benefit-desc">Our burnout model is 79% accurate and improving monthly. Our attrition model reaches 84% at a 90-day horizon. You get a Monday morning alert — not a post-mortem.</p>
       </div>
       <div class="benefit-card reveal">
         <div class="benefit-num">03</div>
@@ -1003,8 +752,8 @@
           <rect x="3" y="14" width="7" height="7" rx="2"/>
           <path d="M14 17.5h7M17.5 14v7"/>
         </svg>
-        <div class="benefit-title">Dashboards That Actually Make Sense</div>
-        <p class="benefit-desc">Clean, executive-ready views of engagement, performance, and team health. No data science degree required — just the right numbers, in the right context, at the right time.</p>
+        <div class="benefit-title">Dashboards Your CFO Can Read</div>
+        <p class="benefit-desc">Executive-ready views linking team health to revenue impact. No data science degree required. Our clients report NPS 72 — because the interface is clear enough to actually use.</p>
       </div>
       <div class="benefit-card reveal">
         <div class="benefit-num">04</div>
@@ -1012,8 +761,8 @@
           <path d="M3 3v18h18"/>
           <path d="m7 16 4-4 4 4 5-5"/>
         </svg>
-        <div class="benefit-title">HR That Speaks Business</div>
-        <p class="benefit-desc">Link workforce health to business outcomes. Correlate team stability with productivity, project velocity, and revenue — turning HR into a strategic driver, not a support function.</p>
+        <div class="benefit-title">HR That Speaks to the Board</div>
+        <p class="benefit-desc">Correlate workforce health with productivity, velocity, and revenue. Our average client ROI is 6× (auditor-verified). One client hit 11×. Turn the people budget from a cost to an investment.</p>
       </div>
     </div>
   </section>
@@ -1032,29 +781,137 @@
     </div>
   </section>
 
+  <!-- ROI CALCULATOR -->
+  <section class="roi-section" id="roi">
+    <div class="roi-inner reveal">
+      <div class="roi-context">
+        <div class="section-label">ROI Calculator</div>
+        <h2>How much is turnover <span class="gradient-text">costing you?</span></h2>
+        <p class="section-sub">Most companies underestimate their turnover cost by 3–5×. Run the numbers — it takes 30 seconds.</p>
+        <ul class="roi-proof-list">
+          <li>
+            <div class="roi-proof-num">11×</div>
+            <div class="roi-proof-text">
+              <strong>NovaPower Corp — 12,000 employees</strong>
+              <span>$4.7M saved in 8 months. Turnover dropped from 18% to 11%.</span>
+            </div>
+          </li>
+          <li>
+            <div class="roi-proof-num">6×</div>
+            <div class="roi-proof-text">
+              <strong>Average across 78 clients</strong>
+              <span>Put in $400K, save $2.4M. Verified with independent auditor.</span>
+            </div>
+          </li>
+          <li>
+            <div class="roi-proof-num">67%</div>
+            <div class="roi-proof-text">
+              <strong>Trial-to-paid conversion rate</strong>
+              <span>Because teams see results before the trial ends.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="roi-calculator">
+        <h3>Calculate your savings</h3>
+        <div class="calc-row">
+          <label for="calcEmployees">Number of employees <span id="calcEmployeesVal">500</span></label>
+          <input type="range" id="calcEmployees" min="50" max="10000" step="50" value="500" oninput="updateCalc()">
+        </div>
+        <div class="calc-row">
+          <label for="calcSalary">Average annual salary <span id="calcSalaryVal">$75,000</span></label>
+          <input type="range" id="calcSalary" min="30000" max="200000" step="5000" value="75000" oninput="updateCalc()">
+        </div>
+        <div class="calc-row">
+          <label for="calcTurnover">Annual turnover rate <span id="calcTurnoverVal">15%</span></label>
+          <input type="range" id="calcTurnover" min="5" max="40" step="1" value="15" oninput="updateCalc()">
+        </div>
+
+        <div class="roi-results">
+          <div class="roi-result-item">
+            <div class="roi-result-label">Your annual turnover cost</div>
+            <div class="roi-result-val" id="resultCost">$2,812,500</div>
+          </div>
+          <div class="roi-result-item">
+            <div class="roi-result-label">Datapeople annual cost</div>
+            <div class="roi-result-val" id="resultDpCost">$210,000</div>
+          </div>
+          <div class="roi-result-item">
+            <div class="roi-result-label">Projected savings (−34%)</div>
+            <div class="roi-result-val" id="resultSavings">$956,250</div>
+          </div>
+          <div class="roi-result-item highlight">
+            <div class="roi-result-label">Your net benefit</div>
+            <div class="roi-result-val" id="resultROI">3.6× ROI</div>
+          </div>
+        </div>
+        <div class="roi-cta">
+          <a href="#contact" class="btn-primary" style="width:100%; justify-content:center;">
+            Get my personalized estimate
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <p class="roi-note">Based on 34% avg turnover reduction from 78 clients. Conservative 50% salary replacement cost.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="integrations-section" id="integrations">
+    <div class="integrations-head reveal">
+      <div class="section-label">Integrations</div>
+      <h2>Works with the tools <span class="gradient-text">you already use</span></h2>
+      <p class="section-sub">80% of our clients use NetSuite. We connect in 3 days — automatically mapping 94% of your data fields.</p>
+    </div>
+    <div class="integrations-grid reveal">
+      <div class="integration-tile">
+        <div class="integration-icon">🟠</div>
+        <div class="integration-name">NetSuite</div>
+      </div>
+      <div class="integration-tile">
+        <div class="integration-icon">🔵</div>
+        <div class="integration-name">SAP HR</div>
+      </div>
+      <div class="integration-tile">
+        <div class="integration-icon">🟣</div>
+        <div class="integration-name">Workday</div>
+      </div>
+      <div class="integration-tile">
+        <div class="integration-icon">💬</div>
+        <div class="integration-name">Slack</div>
+      </div>
+      <div class="integration-tile">
+        <div class="integration-icon">📧</div>
+        <div class="integration-name">Corporate Email</div>
+      </div>
+    </div>
+    <p class="integrations-tagline reveal">Connected in <strong>3 days</strong>. First results in <strong>2 weeks</strong>. Custom HR systems: ~4 weeks.</p>
+  </section>
+
   <!-- TRUST -->
   <section class="trust-section" id="trust">
     <div class="trust reveal">
       <div>
         <div class="section-label">By the Numbers</div>
         <h2>Trusted by <span class="gradient-text">growing</span> companies</h2>
-        <p class="section-sub">From fast-scaling startups to established enterprises, Datapeople helps HR teams make decisions with confidence.</p>
+        <p class="section-sub">From mid-market to enterprise, Datapeople helps HR teams make decisions CFOs can get behind.</p>
         <div class="trust-stats">
           <div class="stat-item">
-            <div class="stat-num">62<sup>+</sup></div>
+            <div class="stat-num">78</div>
             <div class="stat-label">Companies actively using Datapeople</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">40<sup>%</sup></div>
-            <div class="stat-label">Average reduction in voluntary turnover</div>
+            <div class="stat-num">34<sup>%</sup></div>
+            <div class="stat-label">Avg turnover reduction (clients following recommendations)</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">3<sup>×</sup></div>
-            <div class="stat-label">Faster issue detection vs. traditional HR surveys</div>
+            <div class="stat-num">84<sup>%</sup></div>
+            <div class="stat-label">Attrition prediction accuracy at 90-day horizon</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">14<sup>d</sup></div>
-            <div class="stat-label">Time to first meaningful insight</div>
+            <div class="stat-num">4<sup>%</sup></div>
+            <div class="stat-label">Annual churn rate (industry avg: 11%)</div>
           </div>
         </div>
       </div>
@@ -1075,21 +932,104 @@
     </div>
   </section>
 
-  <!-- TESTIMONIAL -->
-  <section class="testimonial" id="testimonial">
-    <div class="testimonial-inner reveal">
-      <blockquote class="testimonial-quote">
-        "We reduced voluntary turnover by 40% in the first year. Datapeople didn't just give us dashboards — it gave us the confidence to have hard conversations early, while there was still time to act."
-      </blockquote>
-      <div class="testimonial-meta">
-        <div class="testimonial-result">
-          <div class="result-num">40%</div>
-          <div class="result-label">Reduction in voluntary turnover</div>
+  <!-- CASE STUDY — NOVAPOWER -->
+  <section class="case-study" id="case-study">
+    <div class="case-inner reveal">
+      <div class="case-label">Client Case Study</div>
+      <div class="case-grid">
+        <div>
+          <blockquote class="case-quote">
+            "Datapeople didn't just give us dashboards — it gave us the specific numbers our CFO needed to act. We knew exactly which teams were at risk and exactly what it would cost if we didn't intervene."
+          </blockquote>
+          <div class="case-author">
+            <strong>Chief People Officer</strong>
+            <span>NovaPower Corp · 12,000 employees</span>
+          </div>
         </div>
-        <div class="testimonial-author">
-          <div class="author-name">Sarah Chen</div>
-          <div class="author-role">Chief People Officer · GlobalScale Technologies</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-num">11×</div>
+            <div class="case-metric-label">ROI in 8 months</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-num">$4.7M</div>
+            <div class="case-metric-label">Savings achieved</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-num">18→11%</div>
+            <div class="case-metric-label">Turnover rate drop</div>
+          </div>
         </div>
+      </div>
+      <hr class="case-divider">
+      <div class="case-pullquote">
+        <p>"23% of our call center team was in the burnout risk zone. Datapeople calculated $800,000 in replacement costs we were heading toward in the next 3 months. That's when we signed."</p>
+        <cite>— Head of People Operations · InsureTech Partners</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPLEMENTATION TIMELINE -->
+  <section class="timeline-section" id="timeline">
+    <div class="timeline-head reveal">
+      <div class="section-label">Implementation</div>
+      <h2>First results in <span class="gradient-text">2 weeks</span>, not 3 months</h2>
+      <p class="section-sub">We hear this a lot: "We don't have time for a long implementation." That's exactly why we built it differently.</p>
+    </div>
+    <div class="timeline-steps reveal">
+      <div class="timeline-step">
+        <div class="step-dot">1</div>
+        <div class="step-days">Day 1–3</div>
+        <div class="step-title">Connect your data</div>
+        <p class="step-desc">We connect to NetSuite, SAP HR, Workday, or Slack. Our neural classifier automatically maps 94% of your data fields in about an hour. Manual review takes 2–3 hours.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-dot">2</div>
+        <div class="step-days">Day 4–10</div>
+        <div class="step-title">Model setup & calibration</div>
+        <p class="step-desc">We set up your attrition and burnout models, calibrate them to your industry and workforce size. Works at any scale — we've processed 25,000+ employee datasets.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="step-dot">3</div>
+        <div class="step-days">Day 14</div>
+        <div class="step-title">First risk report delivered</div>
+        <p class="step-desc">Your first full risk report, ready for your leadership team. Risk zones identified. Recommendations attached. Ready to share with your CFO on day 14.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="timeline-note">
+        <span>💡</span>
+        <span>Custom HR systems (not NetSuite/SAP/Workday): <strong>~4 weeks</strong>. Applies to about 10–15% of clients.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY DATAPEOPLE -->
+  <section class="why-section" id="why">
+    <div class="why-head reveal">
+      <div class="section-label">Why Us</div>
+      <h2>Built for companies who need <span class="gradient-text">real answers</span></h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <span class="why-icon">🏠</span>
+        <div class="why-title">Your data stays home</div>
+        <p class="why-desc">Domestic servers only. Your employee data never leaves your country — a <strong>dealbreaker requirement</strong> for many enterprises.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🎯</span>
+        <div class="why-title">84% prediction accuracy</div>
+        <p class="why-desc">Models trained on local industry data — not generic global datasets. <strong>Accuracy improves</strong> each month as your data grows.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">💰</span>
+        <div class="why-title">$35/employee/month</div>
+        <p class="why-desc">Fraction of the cost of alternatives — with a <strong>recommendation engine</strong> they don't have. Not just dashboards. Action plans.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🔗</span>
+        <div class="why-title">NetSuite-native</div>
+        <p class="why-desc">80% of our clients use NetSuite. We connect in <strong>3 days</strong>, not months. No manual data upload. No engineering tickets.</p>
       </div>
     </div>
   </section>
@@ -1105,10 +1045,17 @@
         </p>
         <ul class="form-points">
           <li>30-minute live walkthrough with your own sample data</li>
-          <li>No sales pressure — just honest answers to your questions</li>
+          <li>Your projected ROI calculated before the call ends</li>
           <li>Implementation in as little as 2 weeks, no IT overhaul required</li>
-          <li>SOC 2 compliant, GDPR-ready, enterprise-grade security</li>
+          <li>SOC 2 compliant, GDPR-ready, domestic servers</li>
         </ul>
+        <div class="leadership-cta">
+          <p><strong>Preparing a business case for leadership?</strong><br>Download a one-page ROI summary to share with your CFO or CEO — pre-filled with industry benchmarks.</p>
+          <a href="mailto:demo@datapeople.com?subject=ROI One-Pager Request" class="btn-outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download ROI One-Pager (PDF)
+          </a>
+        </div>
       </div>
 
       <form class="contact-form" onsubmit="handleSubmit(event)">
@@ -1134,8 +1081,19 @@
             <option>5,000+ employees</option>
           </select>
         </div>
+        <div class="form-row">
+          <label for="turnover">Approx. Annual Turnover Rate</label>
+          <select id="turnover" name="turnover">
+            <option value="" disabled selected>Select range</option>
+            <option>Under 10%</option>
+            <option>10–15%</option>
+            <option>15–25%</option>
+            <option>Over 25%</option>
+            <option>Not sure</option>
+          </select>
+        </div>
         <button type="submit" class="btn-submit" id="submitBtn">
-          <span id="btnText">Request Your Demo</span>
+          <span id="btnText">Calculate My ROI & Request Demo</span>
           <svg id="btnArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
         <p class="form-note">We'll be in touch within one business day. No spam, ever. 💕</p>
@@ -1145,9 +1103,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">
-      <img src="datapeople-logo.png" alt="datapeople">
-    </div>
+    <div class="footer-logo"><img src="datapeople-logo.png" alt="datapeople"></div>
     <div class="footer-copy">© 2026 Datapeople. All rights reserved.</div>
     <div class="footer-links">
       <a href="#">Privacy</a>
@@ -1157,21 +1113,48 @@
   </footer>
 
   <script>
+    // ─── ROI CALCULATOR ───
+    function fmt(n) {
+      if (n >= 1000000) return '$' + (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000) return '$' + Math.round(n / 1000) + 'K';
+      return '$' + Math.round(n).toLocaleString();
+    }
+
+    function updateCalc() {
+      const employees = +document.getElementById('calcEmployees').value;
+      const salary    = +document.getElementById('calcSalary').value;
+      const turnover  = +document.getElementById('calcTurnover').value;
+
+      document.getElementById('calcEmployeesVal').textContent = employees.toLocaleString();
+      document.getElementById('calcSalaryVal').textContent    = '$' + salary.toLocaleString();
+      document.getElementById('calcTurnoverVal').textContent  = turnover + '%';
+
+      const turnoverCost = employees * (turnover / 100) * salary * 0.5;
+      const dpCost       = employees * 35 * 12;
+      const savings      = turnoverCost * 0.34;
+      const net          = savings - dpCost;
+      const roi          = net > 0 ? (net / dpCost).toFixed(1) + '× ROI' : 'Break-even';
+
+      document.getElementById('resultCost').textContent    = fmt(turnoverCost);
+      document.getElementById('resultDpCost').textContent  = fmt(dpCost);
+      document.getElementById('resultSavings').textContent = fmt(savings);
+      document.getElementById('resultROI').textContent     = roi;
+    }
+    updateCalc();
+
     // ─── SCROLL REVEAL ───
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const delay = entry.target.dataset.delay || 0;
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, delay);
+          setTimeout(() => entry.target.classList.add('visible'), delay);
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach((el, i) => {
-      el.dataset.delay = (i % 3) * 80;
+      el.dataset.delay = (i % 4) * 60;
       observer.observe(el);
     });
 
@@ -1181,16 +1164,14 @@
       const btn = document.getElementById('submitBtn');
       const btnText = document.getElementById('btnText');
       const btnArrow = document.getElementById('btnArrow');
-
       btn.disabled = true;
       btn.style.background = 'linear-gradient(135deg, #22a86a, #1a8a56)';
       btnText.textContent = 'Request Sent! 🎉';
       btnArrow.innerHTML = '<path d="M20 6L9 17l-5-5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
-
       setTimeout(() => {
         btn.disabled = false;
         btn.style.background = '';
-        btnText.textContent = 'Request Your Demo';
+        btnText.textContent = 'Calculate My ROI & Request Demo';
         btnArrow.innerHTML = '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>';
       }, 3000);
     }
@@ -1198,18 +1179,11 @@
     // ─── NAV SCROLL SHRINK ───
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
-      if (window.scrollY > 40) {
-        nav.style.padding = '12px 56px';
-        nav.style.boxShadow = '0 4px 24px rgba(255, 105, 180, 0.12)';
-      } else {
-        nav.style.padding = '18px 56px';
-        nav.style.boxShadow = '0 2px 20px rgba(255, 105, 180, 0.08)';
-      }
+      nav.style.padding = window.scrollY > 40 ? '12px 56px' : '18px 56px';
     });
 
     // ─── BAR CHART ANIMATION ───
-    const bars = document.querySelectorAll('.bar');
-    bars.forEach(bar => {
+    document.querySelectorAll('.bar').forEach(bar => {
       const h = bar.style.height;
       bar.style.height = '0';
       setTimeout(() => {
