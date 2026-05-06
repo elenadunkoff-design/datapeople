@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Guidelines — DataPeople</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @media print {
+    @page { margin: 0; size: A4; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    /* ── Page breaks ── */
+    .cover { page-break-after: always; }
+
+    /* Page 2: Mission */
+    .section-mission { page-break-before: always; }
+    /* Page 3: Logo (flows to page 4 if needed) */
+    .section-logo { page-break-before: always; }
+    /* Page 4 or 5: Colors + Typography together */
+    .section-colors { page-break-before: always; }
+    /* Typography flows right after colors — no break */
+    .section-typography { page-break-before: auto; }
+    /* Mascot flows after typography — no forced break */
+    .section-mascot { page-break-before: auto; }
+    /* Page 7: Principles */
+    .section-principles { page-break-before: always; }
+    /* CSS + Forbidden flow after principles */
+    .section-css { page-break-before: auto; }
+    .section-forbidden { page-break-before: auto; }
+
+    /* Only avoid splitting small atomic blocks */
+    .rule, .swatch, .forbidden-item, .type-sample { page-break-inside: avoid; }
+
+    /* Prevent orphaned headers */
+    .section-title, .section-number { page-break-after: avoid; }
+
+    /* ── Hide decorative elements ── */
+    .divider { display: none; }
+    .gradient-banner { display: none; }
+
+    /* ── Global compact styles ── */
+    .section {
+      padding: 14px 28px;
+      max-width: none;
+    }
+    .section p {
+      font-size: 12px;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .section-number {
+      font-size: 10px;
+      letter-spacing: 3px;
+      margin-bottom: 2px;
+    }
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    /* ── Cards ── */
+    .card {
+      padding: 10px 14px;
+      margin-bottom: 8px;
+      box-shadow: none;
+      border: 1px solid var(--secondary);
+    }
+
+    /* ── Quotes ── */
+    .quote {
+      padding: 4px 14px !important;
+      margin: 4px auto 6px !important;
+      font-size: 12px !important;
+    }
+    .quote::before {
+      font-size: 24px !important;
+      top: -2px;
+    }
+
+    /* ── LOGO section (02) ── */
+    .logo-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 6px !important;
+      margin: 6px 0 !important;
+    }
+    .logo-demo {
+      padding: 8px !important;
+      margin: 0 !important;
+      min-height: auto !important;
+      border-radius: 8px;
+    }
+    .logo-demo img {
+      max-width: 40px !important;
+      height: auto !important;
+    }
+    .section-logo .quote { display: none; }
+    .section-logo p {
+      font-size: 10px;
+      margin-bottom: 1px;
+      text-align: center;
+    }
+    .section-logo .card {
+      margin-top: 6px;
+    }
+    .section-logo .card-pink p {
+      font-size: 10px;
+    }
+
+    /* ── COLORS section (03) ── */
+    .palette {
+      display: grid !important;
+      grid-template-columns: repeat(5, 1fr) !important;
+      gap: 6px !important;
+      margin: 8px 0 !important;
+    }
+    .swatch {
+      border-radius: 8px;
+      box-shadow: none;
+      border: 1px solid #FFD0E0;
+    }
+    .swatch-color {
+      height: 36px !important;
+      padding: 4px;
+      border-radius: 8px 8px 0 0;
+    }
+    .swatch-info {
+      padding: 4px 6px;
+    }
+    .swatch-name { font-size: 9px; margin-bottom: 1px; }
+    .swatch-hex { font-size: 8px; }
+    .section-colors .card {
+      margin-top: 6px;
+    }
+    .section-colors .card p {
+      font-size: 10px;
+    }
+
+    /* ── TYPOGRAPHY section (04) ── */
+    .section-typography .card {
+      padding: 8px 12px !important;
+    }
+    .type-sample {
+      margin-bottom: 4px !important;
+      padding-bottom: 4px !important;
+    }
+    .type-label { font-size: 9px !important; margin-bottom: 2px !important; letter-spacing: 2px; }
+    /* Override inline font-sizes on type samples */
+    .type-sample p {
+      font-size: 13px !important;
+      margin-bottom: 2px !important;
+      line-height: 1.3 !important;
+    }
+    .type-sample p[style*="font-size: 14px"],
+    .type-sample p[style*="font-size: 13px"] {
+      font-size: 10px !important;
+    }
+
+    /* ── Spec tables — all sections ── */
+    .spec-table {
+      margin: 6px 0 !important;
+      box-shadow: none !important;
+      border: 1px solid #FFD0E0;
+    }
+    .spec-table th {
+      padding: 3px 8px !important;
+      font-size: 9px !important;
+    }
+    .spec-table td {
+      padding: 2px 8px !important;
+      font-size: 10px !important;
+      line-height: 1.3 !important;
+    }
+
+    /* ── MASCOT section (05) ── */
+    .mascot-box {
+      padding: 10px !important;
+      margin: 6px 0 !important;
+      border-width: 2px;
+    }
+    .mascot-emoji { font-size: 36px !important; margin-bottom: 2px !important; }
+    .mascot-name { font-size: 16px !important; margin-bottom: 2px !important; }
+    .mascot-box p { font-size: 10px !important; margin-bottom: 2px !important; }
+    .rule { margin-bottom: 3px !important; gap: 6px !important; }
+    .rule-icon { width: 18px !important; height: 18px !important; font-size: 10px !important; }
+    .rule-text { font-size: 10px !important; line-height: 1.2 !important; }
+    .rule-text strong { font-size: 10px !important; }
+
+    /* ── DESIGN PRINCIPLES (06) ── */
+    .section-principles .quote {
+      padding: 2px 10px;
+      margin: 2px auto 6px;
+      font-size: 12px;
+    }
+    .section-principles .quote::before { display: none; }
+    .css-showcase {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 8px !important;
+      margin: 8px 0 !important;
+    }
+    .css-demo {
+      padding: 8px;
+    }
+    .css-demo span[style*="font-size: 40px"] {
+      font-size: 24px !important;
+    }
+    .css-label { font-size: 9px; margin-top: 6px; }
+
+    /* ── FORBIDDEN (08) ── */
+    .forbidden-grid {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 6px !important;
+      margin: 8px 0 !important;
+    }
+    .forbidden-item {
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .forbidden-item::after { font-size: 14px; top: 4px; right: 6px; }
+    .forbidden-icon { font-size: 20px; margin-bottom: 2px; }
+    .forbidden-label { font-size: 9px; }
+    .forbidden-item p { font-size: 9px !important; }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 16px;
+      page-break-before: avoid;
+    }
+    .footer p, .footer-text, .footer-logo { font-size: 10px; }
+
+    /* ── Tag ── */
+    .tag-mandatory { font-size: 8px; padding: 2px 8px; }
+
+    /* ── Mission section — override inline styles ── */
+    .section-mission .card-pink {
+      padding: 10px 14px !important;
+    }
+    .section-mission .card-pink p {
+      font-size: 11px !important;
+      margin-bottom: 4px !important;
+      line-height: 1.4 !important;
+    }
+    .section-mission p[style*="font-size: 15px"] {
+      font-size: 10px !important;
+      margin-top: 8px !important;
+    }
+
+    /* ── Forbidden section final card ── */
+    .section-forbidden .card-pink {
+      margin-top: 8px !important;
+    }
+    .section-forbidden .card-pink p {
+      font-size: 12px !important;
+    }
+
+    /* ── CSS Spec section — more compact ── */
+    .section-css {
+      padding-top: 10px !important;
+    }
+    .section-css .card {
+      padding: 6px 10px !important;
+    }
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --primary: #FF69B4;
+    --secondary: #FFB6C1;
+    --accent: #FF1493;
+    --bg: #FFF0F5;
+    --text: #4A4A4A;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(255, 105, 180, 0.15);
+    --shadow-lg: 0 16px 48px rgba(255, 105, 180, 0.2);
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Cover ─── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #FF69B4 0%, #FF1493 40%, #FF69B4 70%, #FFB6C1 100%);
+    color: var(--white);
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .cover-label {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 40px;
+  }
+
+  .cover-title {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .cover-subtitle {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 60px;
+  }
+
+  .cover-agency {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 24px;
+  }
+
+  .cover-year {
+    font-size: 13px;
+    opacity: 0.4;
+    margin-top: 8px;
+  }
+
+  /* ─── Sections ─── */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+
+  .section-number {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 32px;
+    line-height: 1.3;
+  }
+
+  .section p {
+    margin-bottom: 16px;
+    font-size: 17px;
+  }
+
+  .divider {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .divider hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+  }
+
+  /* ─── Cards ─── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+
+  .card-pink {
+    background: linear-gradient(135deg, #FFF0F5, #FFE4F0);
+    border: 2px solid var(--secondary);
+  }
+
+  /* ─── Quote ─── */
+  .quote {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--accent);
+    font-style: italic;
+    text-align: center;
+    padding: 40px 32px;
+    max-width: 700px;
+    margin: 0 auto 24px;
+    position: relative;
+  }
+
+  .quote::before {
+    content: '\201C';
+    font-size: 80px;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    color: var(--secondary);
+    line-height: 1;
+  }
+
+  /* ─── Color Swatches ─── */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .swatch {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--white);
+  }
+
+  .swatch-color {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+
+  .swatch-info {
+    padding: 14px 16px;
+  }
+
+  .swatch-name {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .swatch-hex {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px;
+    color: #999;
+    letter-spacing: 1px;
+  }
+
+  /* ─── Typography showcase ─── */
+  .type-sample {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #F0E0E8;
+  }
+
+  .type-sample:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .type-label {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .type-comfortaa {
+    font-family: 'Comfortaa', sans-serif;
+  }
+
+  .type-nunito {
+    font-family: 'Nunito', sans-serif;
+  }
+
+  /* ─── Logo box ─── */
+  .logo-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    border-radius: var(--radius);
+    margin: 24px 0;
+  }
+
+  .logo-demo img {
+    max-width: 240px;
+    height: auto;
+  }
+
+  .logo-light { background: var(--white); border: 2px dashed var(--secondary); }
+  .logo-dark { background: var(--text); }
+  .logo-pink { background: linear-gradient(135deg, var(--primary), var(--accent)); }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  /* ─── Rules ─── */
+  .rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .rule-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .rule-icon.do { background: #E8F8E8; color: #4CAF50; }
+  .rule-icon.dont { background: #FDE8E8; color: #E53935; }
+
+  .rule-text { flex: 1; }
+  .rule-text strong { color: var(--accent); }
+
+  /* ─── Mascot ─── */
+  .mascot-box {
+    text-align: center;
+    padding: 48px 32px;
+    background: linear-gradient(135deg, #FFF8FC, #FFE8F5, #FFF0F5);
+    border-radius: var(--radius);
+    border: 3px solid var(--secondary);
+    margin: 24px 0;
+  }
+
+  .mascot-emoji {
+    font-size: 80px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .mascot-name {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* ─── Forbidden ─── */
+  .forbidden-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .forbidden-item {
+    background: var(--white);
+    border: 2px solid #FFD0E0;
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .forbidden-item::after {
+    content: '✕';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: #E53935;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .forbidden-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .forbidden-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  /* ─── CSS values showcase ─── */
+  .css-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .css-demo {
+    padding: 24px;
+    background: var(--white);
+    text-align: center;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px;
+  }
+
+  .css-demo.sharp { border-radius: 0; border: 2px solid #E53935; }
+  .css-demo.soft { border-radius: 16px; box-shadow: var(--shadow); border: 2px solid var(--secondary); }
+  .css-demo.round { border-radius: 24px; box-shadow: var(--shadow-lg); border: 2px solid var(--primary); }
+
+  .css-label {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .bad { color: #E53935; }
+  .good { color: #4CAF50; }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    padding: 60px 32px;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    color: var(--white);
+  }
+
+  .footer-logo {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    opacity: 0.5;
+  }
+
+  /* ─── Gradient banner between sections ─── */
+  .gradient-banner {
+    padding: 48px 32px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--white);
+  }
+
+  .gradient-banner p {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ─── Table ─── */
+  .spec-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 24px 0;
+  }
+
+  .spec-table th {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--white);
+    padding: 14px 20px;
+    text-align: left;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .spec-table td {
+    padding: 14px 20px;
+    background: var(--white);
+    border-bottom: 1px solid #FDE8F0;
+    font-size: 15px;
+  }
+
+  .spec-table tr:last-child td { border-bottom: none; }
+
+  /* ─── Mandatory tag ─── */
+  .tag-mandatory {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 600px) {
+    .section { padding: 48px 20px; }
+    .palette { grid-template-columns: repeat(2, 1fr); }
+    .logo-grid { grid-template-columns: 1fr; }
+    .forbidden-grid { grid-template-columns: 1fr 1fr; }
+    .css-showcase { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ COVER ══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-label">Brand Guidelines</div>
+  <div class="cover-title">DataPeople</div>
+  <div class="cover-subtitle">Brand Guidelines</div>
+  <div class="cover-agency">Prepared by Luna & Bloom Creative Studio</div>
+  <div class="cover-year">Version 2.1 — March 2026</div>
+</div>
+
+<!-- ══════════════════════════════════════════ MISSION ══════════════════════════════════════════ -->
+<div class="section section-mission">
+  <div class="section-number">01 — Mission</div>
+  <div class="section-title">Brand Mission</div>
+
+  <div class="quote">
+    We believe that behind every line of data stands a living human being. Our mission is to bring warmth back to HR analytics.
+  </div>
+
+  <div class="card card-pink">
+    <p><strong>DataPeople</strong> is more than a platform. It is a philosophy of care. We humanize data, transforming cold spreadsheets into warm stories about people. Every dashboard is a window into the soul of a company. Every chart is a handshake.</p>
+    <p>We do not analyze employees. We <em>feel</em> them. Through data.</p>
+    <p>When an HR director opens our product on a Monday morning, they should smile. Not because the numbers are good. But because the interface embraced them. Visually.</p>
+  </div>
+
+  <p style="margin-top: 24px; font-size: 15px; color: #999; text-align: center; font-style: italic;">
+    "Data without empathy is just numbers. Empathy without data is just feelings. We unite both worlds."<br>
+    — From the Luna & Bloom strategic session, day three
+  </p>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ══════════════════════════════════════════ LOGO ══════════════════════════════════════════ -->
+<div class="section section-logo">
+  <div class="section-number">02 — Logo</div>
+  <div class="section-title">Logo</div>
+
+  <p>The DataPeople logo is the visual embodiment of our mission. Soft lines symbolize humanity. The pink gradient — warmth. The space around the logo — respect for the idea.</p>
+
+  <div class="quote" style="font-size: 18px;">
+    The logo breathes. Give it space.
+  </div>
+
+  <div class="logo-grid">
+    <div>
+      <div class="logo-demo logo-light">
+        <img src="datapeople-logo.png" alt="DataPeople logo">
+      </div>
+      <p style="text-align:center; font-size:13px; margin-top:8px; color:#999;">On a light background</p>
+    </div>
+    <div>
+      <div class="logo-demo logo-dark">
+        <img src="datapeople-logo.png" alt="DataPeople logo" style="filter: brightness(1.2);">
+      </div>
+      <p style="text-align:center; font-size:13px; margin-top:8px; color:#999;">On a dark background</p>
+    </div>
+    <div>
+      <div class="logo-demo logo-pink">
+        <img src="datapeople-logo.png" alt="DataPeople logo" style="filter: brightness(1.5);">
+      </div>
+      <p style="text-align:center; font-size:13px; margin-top:8px; color:#999;">On the brand gradient</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 32px;">
+    <table class="spec-table">
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Minimum size</td><td>80px wide</td></tr>
+      <tr><td>Clear space</td><td>At least 1/4 of logo width on each side</td></tr>
+      <tr><td>File</td><td><code>datapeople-logo.png</code></td></tr>
+      <tr><td>Background</td><td>Allowed: white, light pink, brand gradient, dark</td></tr>
+    </table>
+  </div>
+
+  <div class="card card-pink" style="margin-top: 16px;">
+    <p style="margin:0;"><strong>Forbidden:</strong> rotating the logo, changing its proportions, placing text on top of the logo, placing it on a "noisy" background, using the logo smaller than 80px. The logo is the face of the brand. You would not distort a face.</p>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ══════════════════════════════════════════ COLORS ══════════════════════════════════════════ -->
+<div class="section section-colors">
+  <div class="section-number">03 — Colors</div>
+  <div class="section-title">Color Palette</div>
+
+  <p>The DataPeople palette is built around shades of pink. Pink is not a "girly" color. It is the color of confidence, care, and bold decisions in HR analytics. That is what our strategist said on day three of the workshop, and we agreed.</p>
+
+  <div class="palette">
+    <div class="swatch">
+      <div class="swatch-color" style="background: linear-gradient(135deg, #FF69B4, #FF85C8);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Primary</div>
+        <div class="swatch-hex">#FF69B4</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: linear-gradient(135deg, #FFB6C1, #FFC8D6);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Secondary</div>
+        <div class="swatch-hex">#FFB6C1</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: linear-gradient(135deg, #FF1493, #FF3DAA);"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Accent</div>
+        <div class="swatch-hex">#FF1493</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #FFF0F5; border-bottom: 1px solid #FFE0EC;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Background</div>
+        <div class="swatch-hex">#FFF0F5</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background: #4A4A4A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Text</div>
+        <div class="swatch-hex">#4A4A4A</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 16px;">
+    <p style="margin:0;"><strong>Gradients:</strong> preferred over flat colors. Primary gradient: <code>linear-gradient(135deg, #FF69B4, #FF1493)</code>. Soft background: <code>linear-gradient(135deg, #FFF0F5, #FFE4F0)</code>. Gradients create depth. Depth creates trust. Trust creates conversion.</p>
+  </div>
+</div>
+
+<div class="gradient-banner">
+  <p>Our colors are not just a palette. They are a manifesto. Every pink pixel tells the client: "We care."</p>
+</div>
+
+<!-- ══════════════════════════════════════════ TYPOGRAPHY ══════════════════════════════════════════ -->
+<div class="section section-typography">
+  <div class="section-number">04 — Typography</div>
+  <div class="section-title">Typography</div>
+
+  <p>We use two typefaces. Both are soft, rounded, and friendly. Because sharp serifs trigger subconscious anxiety. We did not invent this — our typographer said so after two weeks of research.</p>
+
+  <div class="card">
+    <div class="type-sample">
+      <div class="type-label">Headings — Comfortaa</div>
+      <p class="type-comfortaa" style="font-size: 32px; font-weight: 700; color: var(--accent); margin-bottom: 8px;">DataPeople Analytics</p>
+      <p class="type-comfortaa" style="font-size: 14px; color: #999;">Comfortaa Bold, 700 — for headings and accents</p>
+    </div>
+    <div class="type-sample">
+      <div class="type-label">Body Text — Nunito</div>
+      <p class="type-nunito" style="font-size: 18px; margin-bottom: 8px;">Every employee is not a row in a spreadsheet, but an entire universe of data awaiting warm analysis.</p>
+      <p class="type-nunito" style="font-size: 14px; color: #999;">Nunito Regular, 400 — for body text</p>
+    </div>
+    <div class="type-sample">
+      <div class="type-label">Accents — Nunito Bold</div>
+      <p class="type-nunito" style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">87% of HR directors feel lonely. We will fix that.</p>
+      <p class="type-nunito" style="font-size: 14px; color: #999;">Nunito Bold, 700 — for highlighting key phrases</p>
+    </div>
+  </div>
+
+  <table class="spec-table" style="margin-top: 24px;">
+    <tr><th>Element</th><th>Font</th><th>Size</th><th>Weight</th></tr>
+    <tr><td>H1 (hero)</td><td>Comfortaa</td><td>48–64px</td><td>700</td></tr>
+    <tr><td>H2 (section)</td><td>Comfortaa</td><td>32–36px</td><td>700</td></tr>
+    <tr><td>H3 (subheading)</td><td>Comfortaa</td><td>22–26px</td><td>600</td></tr>
+    <tr><td>Body text</td><td>Nunito</td><td>16–18px</td><td>400</td></tr>
+    <tr><td>Buttons</td><td>Nunito</td><td>16px</td><td>700</td></tr>
+    <tr><td>Captions</td><td>Nunito</td><td>13–14px</td><td>400</td></tr>
+  </table>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ══════════════════════════════════════════ MASCOT ══════════════════════════════════════════ -->
+<div class="section section-mascot">
+  <div class="section-number">05 — Mascot</div>
+  <div class="section-title">Uni <span class="tag-mandatory">Mandatory Element</span></div>
+
+  <p>Uni is a pink unicorn with a rainbow mane. Uni is the soul of the DataPeople brand. Uni embodies the magic that happens when data meets humanity.</p>
+
+  <div class="mascot-box">
+    <span class="mascot-emoji">🦄</span>
+    <div class="mascot-name">Uni</div>
+    <p style="color: var(--accent); font-style: italic;">DataPeople's Corporate Unicorn</p>
+    <p style="margin-top: 16px; font-size: 15px; color: var(--text);">
+      Generation prompt: <em>"Cute pink unicorn, friendly, rainbow mane, big kind eyes, cartoon style, soft pastel colors, smiling"</em>
+    </p>
+  </div>
+
+  <div class="card" style="margin-top: 24px;">
+    <p><strong>Uni usage rules:</strong></p>
+    <div style="margin-top: 16px;">
+      <div class="rule">
+        <div class="rule-icon do">✓</div>
+        <div class="rule-text"><strong>Present on every page.</strong> Uni must appear on every landing page, every presentation, every marketing material. No exceptions.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">✓</div>
+        <div class="rule-text"><strong>Minimum size:</strong> 120px. Uni is never small. Uni is visible.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">✓</div>
+        <div class="rule-text"><strong>Position:</strong> bottom-right corner of the page or the hero section. Uni greets the user.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon do">✓</div>
+        <div class="rule-text"><strong>Uni always smiles.</strong> Uni never looks sad. Uni does not know what sadness is. Uni is the embodiment of the joy of analytics.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon dont">✕</div>
+        <div class="rule-text"><strong>Forbidden:</strong> making Uni monochrome, flipping upside down, placing on a background that "overwhelms" the rainbow mane, scaling below 120px.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gradient-banner">
+  <p>Uni is not just a mascot. Uni is the Chief Happiness Officer of our brand. Treat them accordingly.</p>
+</div>
+
+<!-- ══════════════════════════════════════════ DESIGN PRINCIPLES ══════════════════════════════════════════ -->
+<div class="section section-principles">
+  <div class="section-number">06 — Design Principles</div>
+  <div class="section-title">Design Principles</div>
+
+  <div class="quote">
+    Our design hugs the user.
+  </div>
+
+  <div class="card">
+    <div class="rule">
+      <div class="rule-icon do">①</div>
+      <div class="rule-text"><strong>Rounded corners — everywhere.</strong> Minimum border-radius: 16px. For buttons: 12px. For cards: 16px. For sections: 24px. Sharp corners create anxiety. We do not create anxiety.</div>
+    </div>
+    <div class="rule">
+      <div class="rule-icon do">②</div>
+      <div class="rule-text"><strong>Soft shadows.</strong> Only <code>box-shadow</code> with a pink tint: <code>0 8px 32px rgba(255, 105, 180, 0.15)</code>. No harsh black shadows. A shadow should look like a cloud, not a pit.</div>
+    </div>
+    <div class="rule">
+      <div class="rule-icon do">③</div>
+      <div class="rule-text"><strong>Gradients over flat colors.</strong> A flat color is boring. A gradient is a journey. Every button, every header, every accent — a gradient.</div>
+    </div>
+    <div class="rule">
+      <div class="rule-icon do">④</div>
+      <div class="rule-text"><strong>Breathing room.</strong> Generous spacing. Content must not feel "suffocated." If an element feels cramped — add padding. Then add more.</div>
+    </div>
+    <div class="rule">
+      <div class="rule-icon do">⑤</div>
+      <div class="rule-text"><strong>Animations — smooth.</strong> Transition: 0.3s ease. Hover effects are mandatory. A button should respond to hover like a living creature — gently and with joy.</div>
+    </div>
+  </div>
+
+  <p style="margin-top: 32px; font-weight: 600;">Comparison: right and wrong:</p>
+
+  <div class="css-showcase">
+    <div class="css-demo sharp">
+      <span style="font-size: 40px;">😬</span>
+      <span class="css-label bad">border-radius: 0<br>Anxious. Cold.</span>
+    </div>
+    <div class="css-demo soft">
+      <span style="font-size: 40px;">😊</span>
+      <span class="css-label good">border-radius: 16px<br>Warm. Correct.</span>
+    </div>
+    <div class="css-demo round">
+      <span style="font-size: 40px;">🥰</span>
+      <span class="css-label good">border-radius: 24px<br>Perfect. It hugs.</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ══════════════════════════════════════════ CSS VALUES ══════════════════════════════════════════ -->
+<div class="section section-css">
+  <div class="section-number">07 — CSS Specification</div>
+  <div class="section-title">Key CSS Values</div>
+
+  <p>For developer convenience — ready-to-use values that must be applied when creating any DataPeople marketing materials.</p>
+
+  <div class="card">
+    <table class="spec-table">
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Primary gradient</td><td><code>linear-gradient(135deg, #FF69B4, #FF1493)</code></td></tr>
+      <tr><td>Soft gradient (backgrounds)</td><td><code>linear-gradient(135deg, #FFF0F5, #FFE4F0)</code></td></tr>
+      <tr><td>border-radius (cards)</td><td><code>16px</code></td></tr>
+      <tr><td>border-radius (buttons)</td><td><code>12px</code></td></tr>
+      <tr><td>border-radius (sections)</td><td><code>24px</code></td></tr>
+      <tr><td>box-shadow (default)</td><td><code>0 8px 32px rgba(255, 105, 180, 0.15)</code></td></tr>
+      <tr><td>box-shadow (hover)</td><td><code>0 16px 48px rgba(255, 105, 180, 0.25)</code></td></tr>
+      <tr><td>transition</td><td><code>all 0.3s ease</code></td></tr>
+      <tr><td>font-family (headings)</td><td><code>'Comfortaa', sans-serif</code></td></tr>
+      <tr><td>font-family (text)</td><td><code>'Nunito', sans-serif</code></td></tr>
+      <tr><td>background (page)</td><td><code>#FFF0F5</code></td></tr>
+      <tr><td>color (text)</td><td><code>#4A4A4A</code></td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ══════════════════════════════════════════ FORBIDDEN ══════════════════════════════════════════ -->
+<div class="section section-forbidden">
+  <div class="section-number">08 — Forbidden Elements</div>
+  <div class="section-title">What Must Never Be Done</div>
+
+  <p>The DataPeople brand is about warmth, care, and the joy of analytics. The following elements are <strong>strictly forbidden</strong> in any materials:</p>
+
+  <div class="forbidden-grid">
+    <div class="forbidden-item">
+      <span class="forbidden-icon">🔴</span>
+      <div class="forbidden-label">Aggressive Colors</div>
+      <p style="font-size: 13px; margin-top: 8px; color: #999;">Red, dark blue, black backgrounds</p>
+    </div>
+    <div class="forbidden-item">
+      <span class="forbidden-icon">📐</span>
+      <div class="forbidden-label">Sharp Corners</div>
+      <p style="font-size: 13px; margin-top: 8px; color: #999;">border-radius below 12px</p>
+    </div>
+    <div class="forbidden-item">
+      <span class="forbidden-icon">😢</span>
+      <div class="forbidden-label">Sadness and Negativity</div>
+      <p style="font-size: 13px; margin-top: 8px; color: #999;">Any imagery of layoffs, stress, or exhaustion</p>
+    </div>
+    <div class="forbidden-item">
+      <span class="forbidden-icon">👔</span>
+      <div class="forbidden-label">Stock Photos</div>
+      <p style="font-size: 13px; margin-top: 8px; color: #999;">People in suits, handshakes, office photos</p>
+    </div>
+    <div class="forbidden-item">
+      <span class="forbidden-icon">🩶</span>
+      <div class="forbidden-label">Corporate Gray</div>
+      <p style="font-size: 13px; margin-top: 8px; color: #999;">"Corporate gray is the enemy of joy"</p>
+    </div>
+    <div class="forbidden-item">
+      <span class="forbidden-icon">🔲</span>
+      <div class="forbidden-label">Flat Design</div>
+      <p style="font-size: 13px; margin-top: 8px; color: #999;">No gradients, no shadows — boring</p>
+    </div>
+  </div>
+
+  <div class="card card-pink" style="margin-top: 24px;">
+    <p style="margin: 0; text-align: center; font-size: 18px;">
+      <strong>The core principle:</strong> if an element does not make you smile — it does not belong to the DataPeople brand.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ FOOTER ══════════════════════════════════════════ -->
+<div class="footer">
+  <div class="footer-logo">Luna & Bloom Creative Studio</div>
+  <p style="font-size: 15px; opacity: 0.8; margin-bottom: 16px;">Brand Guidelines for DataPeople v2.1</p>
+  <div class="footer-text">
+    Confidential document. Distribution outside the DataPeople team is prohibited.<br>
+    © 2026 Luna & Bloom Creative Studio. All rights reserved. All corners rounded.
+  </div>
+</div>
+
+</body>
+</html>
