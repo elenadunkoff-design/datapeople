@@ -32,7 +32,22 @@ Generate 3 metadata variants for each video and write them to the Google Sheet a
 
 List all `.mp4` files in the videos/ folder. List all `.txt` files in the transcripts/ folder.
 
-### 2. For each video
+**Deduplication — run this before processing any video:**
+
+Read the current sheet contents with `gws sheets spreadsheets values get`.
+Build a set of filenames already present in column A (skip the header row).
+
+```python
+existing = gws_get("Sheet1")
+already_drafted = {row[0].strip() for row in existing[1:] if row}
+```
+
+Skip any video whose filename is already in `already_drafted` — do not generate variants, do not render thumbnails, do not append a row.
+Report skipped videos at the end: `Skipped (already in sheet): clip_xxx.mp4`.
+
+Only process videos that are **not** in the sheet yet.
+
+### 2. For each video (not already in sheet)
 
 **a) Read content**
 - If a matching transcript exists (same clip ID, e.g. `clip_6fbd3832.mp4` → `clip_6fbd3832.txt`), read it in full.
