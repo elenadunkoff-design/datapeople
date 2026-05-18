@@ -75,17 +75,91 @@ Make the 3 variants meaningfully different:
 **d) Render 3 distinct thumbnails**
 
 Each variant gets its own rendered PNG with that variant's title overlaid on the template.
-Use Python + Pillow to render. Do NOT point all 3 variants at the raw template file.
+Run the following Python script (save to `/tmp/render_thumbnails.py` and execute with `python3`).
+Populate `VIDEOS` with the list of `(clip_id, thumb_type, [(title, desc), ...])` tuples you generated in step (c).
 
-Rendering spec (from `thumbnails/case/SPEC.md` and `thumbnails/educational/SPEC.md`):
-- Font: `/System/Library/Fonts/HelveticaNeue.ttc` index 1 (Bold), color `#1A1A3A`, no shadow
-- Starting size: 96px, step down 2px, minimum 36px, max 3 lines
-- Render zone for **case**: x ∈ [50% W, 96% W], y centered across full height
-- Render zone for **educational**: x ∈ [4% W, 50% W], y centered across full height
-- If title won't fit in 3 lines at any size — raise an error, rewrite the title
+```python
+import os
+from PIL import Image, ImageDraw, ImageFont
 
-Save rendered thumbnails to `thumbnails/rendered/{clip_id}_v{1,2,3}.png`.
-Set each variant's Thumbnail column to the absolute path of its rendered PNG.
+BASE      = os.path.expanduser("~/datapeople/DataPeople — Module 5 inputs (EN)")
+FONT_PATH = "/System/Library/Fonts/HelveticaNeue.ttc"
+COLOR     = (26, 26, 58)   # #1A1A3A
+OUT_DIR   = f"{BASE}/thumbnails/rendered"
+TEMPLATES = {
+    "case":        f"{BASE}/thumbnails/case/template.png",
+    "educational": f"{BASE}/thumbnails/educational/template.png",
+}
+# x zone as fraction of image width: (start, end)
+ZONES = {
+    "case":        (0.50, 0.96),
+    "educational": (0.04, 0.50),
+}
+
+os.makedirs(OUT_DIR, exist_ok=True)
+
+def render(template_path, title, out_path, thumb_type):
+    img  = Image.open(template_path).convert("RGBA")
+    W, H = img.size
+    draw = ImageDraw.Draw(img)
+    x0   = int(W * ZONES[thumb_type][0])
+    x1   = int(W * ZONES[thumb_type][1])
+    zone_w = x1 - x0
+
+    # Auto-size: start at 96px, step down by 2px until title fits in ≤3 lines
+    font, lines = None, []
+    for size in range(96, 34, -2):
+        font  = ImageFont.truetype(FONT_PATH, size, index=1)
+        words = title.split()
+        lines, line = [], []
+        for w in words:
+            test = " ".join(line + [w])
+            if draw.textbbox((0, 0), test, font=font)[2] > zone_w and line:
+                lines.append(" ".join(line))
+                line = [w]
+            else:
+                line.append(w)
+        if line:
+            lines.append(" ".join(line))
+        if len(lines) <= 3:
+            break
+    else:
+        raise ValueError(f"Title too long to fit in 3 lines: {title!r}")
+
+    line_h  = draw.textbbox((0, 0), "Ag", font=font)[3]
+    spacing = int(line_h * 0.25)
+    total_h = len(lines) * line_h + (len(lines) - 1) * spacing
+    y = (H - total_h) // 2
+
+    for ln in lines:
+        draw.text((x0, y), ln, font=font, fill=COLOR)
+        y += line_h + spacing
+
+    img.convert("RGB").save(out_path, "PNG")
+    return out_path
+
+# ── Populate this list from step (c) ──
+# VIDEOS = [
+#   ("clip_6fbd3832", "case", [
+#     ("Onboarding done right", "description 1..."),
+#     ("New hire day one: what good looks like", "description 2..."),
+#     ("Two onboarding stories: spot the difference", "description 3..."),
+#   ]),
+#   ...
+# ]
+
+rendered = {}   # clip_id -> [path_v1, path_v2, path_v3]
+for clip_id, thumb_type, variants in VIDEOS:
+    rendered[clip_id] = []
+    for i, (title, _) in enumerate(variants, 1):
+        out_path = f"{OUT_DIR}/{clip_id}_v{i}.png"
+        render(TEMPLATES[thumb_type], title, out_path, thumb_type)
+        rendered[clip_id].append(out_path)
+        print(f"  {clip_id} v{i}: {title!r} → {out_path}")
+```
+
+After running, `rendered[clip_id][0..2]` holds the three PNG paths.
+Set Thumbnail 1/2/3 in the sheet row to `rendered[clip_id][0]`, `[1]`, `[2]` respectively.
 
 ### 3. Write to Google Sheet
 
