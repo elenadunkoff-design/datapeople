@@ -8,8 +8,9 @@ Generate 3 metadata variants for each video and write them to the Google Sheet a
 
 - Videos: `~/datapeople/DataPeople — Module 5 inputs (EN)/videos/`
 - Transcripts: `~/datapeople/DataPeople — Module 5 inputs (EN)/transcripts/`
-- Thumbnail (case): `~/datapeople/DataPeople — Module 5 inputs (EN)/thumbnails/case/template.png`
-- Thumbnail (educational): `~/datapeople/DataPeople — Module 5 inputs (EN)/thumbnails/educational/template.png`
+- Thumbnail template (case): `~/datapeople/DataPeople — Module 5 inputs (EN)/thumbnails/case/template.png`
+- Thumbnail template (educational): `~/datapeople/DataPeople — Module 5 inputs (EN)/thumbnails/educational/template.png`
+- Rendered thumbnails output: `~/datapeople/DataPeople — Module 5 inputs (EN)/thumbnails/rendered/`
 
 ## Google Sheet
 
@@ -71,9 +72,20 @@ Make the 3 variants meaningfully different:
 - Summarize what the viewer will learn or see.
 - No marketing fluff ("game-changing", "revolutionary").
 
-**d) Thumbnail path**
+**d) Render 3 distinct thumbnails**
 
-All 3 variants for one video use the same thumbnail template (the one you classified in step b). Set the Thumbnail column to the absolute path of that template.
+Each variant gets its own rendered PNG with that variant's title overlaid on the template.
+Use Python + Pillow to render. Do NOT point all 3 variants at the raw template file.
+
+Rendering spec (from `thumbnails/case/SPEC.md` and `thumbnails/educational/SPEC.md`):
+- Font: `/System/Library/Fonts/HelveticaNeue.ttc` index 1 (Bold), color `#1A1A3A`, no shadow
+- Starting size: 96px, step down 2px, minimum 36px, max 3 lines
+- Render zone for **case**: x ∈ [50% W, 96% W], y centered across full height
+- Render zone for **educational**: x ∈ [4% W, 50% W], y centered across full height
+- If title won't fit in 3 lines at any size — raise an error, rewrite the title
+
+Save rendered thumbnails to `thumbnails/rendered/{clip_id}_v{1,2,3}.png`.
+Set each variant's Thumbnail column to the absolute path of its rendered PNG.
 
 ### 3. Write to Google Sheet
 
